@@ -1,6 +1,6 @@
 {
   "name": "strv-web",
-  "version": "0.127.4",
+  "version": "0.127.6",
   "private": true,
   "scripts": {
     "dev": "next dev --inspect",
