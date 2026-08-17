@@ -62,7 +62,7 @@ export function CancelOrderButton({ orderId }: { orderId: string }) {
         <AlertDialogFooter>
           <AlertDialogCancel>No, keep order</AlertDialogCancel>
           <AlertDialogAction
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               handleCancel();
             }}

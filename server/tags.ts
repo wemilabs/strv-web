@@ -61,7 +61,7 @@ const linkProductTagsSchema = z.object({
 });
 
 export async function linkProductTags(
-  input: z.infer<typeof linkProductTagsSchema>
+  input: z.infer<typeof linkProductTagsSchema>,
 ) {
   const parsed = linkProductTagsSchema.safeParse(input);
   if (!parsed.success) {
@@ -74,7 +74,7 @@ export async function linkProductTags(
     await db.delete(productTag).where(eq(productTag.productId, productId));
 
     if (tagIds.length > 0) {
-      const values = tagIds.map((tagId) => ({
+      const values = tagIds.map(tagId => ({
         productId,
         tagId,
       }));
@@ -136,7 +136,7 @@ export async function getProductTags(productId: string) {
       },
     });
 
-    return { ok: true, tags: productTags.map((pt) => pt.tag) } as const;
+    return { ok: true, tags: productTags.map(pt => pt.tag) } as const;
   } catch (error: unknown) {
     const e = error as Error;
     console.error(e);

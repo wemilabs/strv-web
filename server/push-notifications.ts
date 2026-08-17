@@ -115,7 +115,7 @@ export async function sendExpoPushToUser(
     return { sent: 0, failed: 0 };
   }
 
-  const messages: ExpoPushMessage[] = tokens.map((t) => ({
+  const messages: ExpoPushMessage[] = tokens.map(t => ({
     to: t.expoPushToken,
     title: payload.title,
     body: payload.body,
@@ -134,7 +134,7 @@ export async function sendExpoPushToUser(
       const receipt = receipts[i];
       const token = tokens[i]?.expoPushToken;
 
-      if (!receipt || receipt.status !== "ok") {
+      if (receipt?.status !== "ok") {
         failed++;
 
         const message = receipt?.message ?? "";
@@ -215,7 +215,7 @@ export async function sendPushToUsers(
   payload: PushNotificationPayload,
 ) {
   const results = await Promise.allSettled(
-    userIds.map((userId) => sendPushToUser(userId, payload)),
+    userIds.map(userId => sendPushToUser(userId, payload)),
   );
 
   const totals = results.reduce(

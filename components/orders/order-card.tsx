@@ -39,7 +39,7 @@ interface OrderCardProps {
 export function OrderCard({ order, variant = "merchant" }: OrderCardProps) {
   const itemCount = order.orderItems.reduce(
     (sum, item) => sum + item.quantity,
-    0
+    0,
   );
 
   const orderNumber =

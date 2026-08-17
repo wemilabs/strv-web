@@ -44,7 +44,7 @@ export function PricingCard({
     <Card
       className={cn(
         "relative flex flex-col h-full transition-all duration-300 hover:shadow-lg",
-        highlighted && "border-primary shadow-lg ring-2 ring-primary/20"
+        highlighted && "border-primary shadow-lg ring-2 ring-primary/20",
       )}
     >
       {highlighted && (
@@ -87,12 +87,12 @@ export function PricingCard({
           {additionalText}
         </p>
         <ul className="mt-6 space-y-2">
-          {features.map((feature) => (
+          {features.map(feature => (
             <li key={feature} className="flex items-start gap-2">
               <Check
                 className={cn(
                   "size-5 shrink-0 mt-0.5",
-                  highlighted ? "text-primary" : "text-muted-foreground"
+                  highlighted ? "text-primary" : "text-muted-foreground",
                 )}
               />
               <span className="text-sm tracking-wide">{feature}</span>

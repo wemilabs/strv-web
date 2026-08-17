@@ -14,7 +14,7 @@ export const getInitials = (name?: string | null) => {
   return name
     .split(" ")
     .filter(Boolean)
-    .map((word) => word[0])
+    .map(word => word[0])
     .join("")
     .slice(0, 2)
     .toUpperCase();
@@ -46,7 +46,7 @@ export const parseOrgMetadata = (metadataStr: string | null) => {
 // ------------------------ Phone utils ------------------------
 export const parsePhoneNumber = (fullPhone: string) => {
   if (!fullPhone) return { countryCode: COUNTRIES[0].code, phoneNumber: "" };
-  const country = COUNTRIES.find((c) => fullPhone.startsWith(c.code));
+  const country = COUNTRIES.find(c => fullPhone.startsWith(c.code));
   if (country)
     return {
       countryCode: country.code,
@@ -223,7 +223,7 @@ export function getCategoryLabel(key: string): string {
 }
 
 export function getCategoryOptions() {
-  return PRODUCT_CATEGORIES.map((key) => ({
+  return PRODUCT_CATEGORIES.map(key => ({
     value: key,
     label: getCategoryLabel(key),
   }));

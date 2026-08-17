@@ -94,7 +94,7 @@ export function InventoryHistoryContent({
             </div>
           ) : (
             <div className="space-y-4 p-4">
-              {history.map((item) => (
+              {history.map(item => (
                 <div
                   key={item.id}
                   className="flex items-center justify-between rounded-lg border p-4"
@@ -109,7 +109,7 @@ export function InventoryHistoryContent({
                           "text-sm font-mono",
                           item.quantityChange > 0
                             ? "text-green-600"
-                            : "text-red-600"
+                            : "text-red-600",
                         )}
                       >
                         {item.quantityChange > 0 ? "+" : ""}

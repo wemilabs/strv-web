@@ -42,7 +42,7 @@ export function OrderList({ orders, variant = "merchant" }: OrderListProps) {
   );
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const filteredOrders = orders.filter((order) => {
+  const filteredOrders = orders.filter(order => {
     const matchesStatus =
       selectedStatus === "all" || order.status === selectedStatus;
     const matchesSearch =
@@ -83,7 +83,7 @@ export function OrderList({ orders, variant = "merchant" }: OrderListProps) {
         </div>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {filteredOrders.map((order) => (
+          {filteredOrders.map(order => (
             <OrderCard key={order.id} order={order} variant={variant} />
           ))}
         </div>

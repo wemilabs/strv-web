@@ -165,7 +165,7 @@ export function PricingGrid({ plans }: PricingGridProps) {
   };
 
   const targetPlan = selectedPlan
-    ? PRICING_PLANS.find((p) => p.name === selectedPlan)
+    ? PRICING_PLANS.find(p => p.name === selectedPlan)
     : null;
 
   return (
@@ -173,7 +173,7 @@ export function PricingGrid({ plans }: PricingGridProps) {
       <div className="flex flex-col items-center gap-4 mt-8">
         <Tabs
           value={billingPeriod}
-          onValueChange={(v) => setBillingPeriod(v as BillingPeriod)}
+          onValueChange={v => setBillingPeriod(v as BillingPeriod)}
           className="w-full max-w-xs"
         >
           <TabsList className="grid w-full grid-cols-2">
@@ -189,7 +189,7 @@ export function PricingGrid({ plans }: PricingGridProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-6 mt-8">
-        {plans.map((plan) => (
+        {plans.map(plan => (
           <PricingCard
             key={plan.name}
             plan={plan}

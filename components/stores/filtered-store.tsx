@@ -24,7 +24,7 @@ export function FilteredStore({ data }: StoreCatalogueSectionProps) {
   const [search] = useQueryState("search", { defaultValue: "" });
   const pathname = usePathname();
 
-  const filteredStores = data?.filter((store) => {
+  const filteredStores = data?.filter(store => {
     const matchesSearch =
       store.name.toLowerCase().includes(search.toLowerCase()) ||
       store.slug.toLowerCase().includes(search.toLowerCase());
@@ -43,7 +43,7 @@ export function FilteredStore({ data }: StoreCatalogueSectionProps) {
       </div>
     );
 
-  return filteredStores.map((store) => (
+  return filteredStores.map(store => (
     <StoreCard
       key={store.id}
       store={store}

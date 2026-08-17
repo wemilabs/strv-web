@@ -2,6 +2,10 @@
 
 import { Fragment, useEffect, useState } from "react";
 import {
+  type Crumb,
+  useBreadcrumbs,
+} from "@/components/context/breadcrumbs-context";
+import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -9,10 +13,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {
-  type Crumb,
-  useBreadcrumbs,
-} from "@/components/context/breadcrumbs-context";
 
 export function NavBreadcrumbs({ base }: { base: Crumb[] }) {
   const { crumbs } = useBreadcrumbs();
@@ -29,7 +29,7 @@ export function NavBreadcrumbs({ base }: { base: Crumb[] }) {
     <Breadcrumb>
       <BreadcrumbList>
         {all.map((c, idx) => (
-          <Fragment key={`${c.label}-${idx}`}>
+          <Fragment key={`${c.label}-${c.href ?? "page"}`}>
             <BreadcrumbItem>
               {c.href ? (
                 <BreadcrumbLink

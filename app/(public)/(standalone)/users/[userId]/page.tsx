@@ -176,7 +176,7 @@ async function UserProfileContent({
               </div>
 
               <div className="space-y-1 mx-auto sm:mx-0">
-                {bioLines.map((line) => (
+                {bioLines.map(line => (
                   <div key={line} className="text-sm text-muted-foreground">
                     {line}
                   </div>
@@ -250,7 +250,7 @@ async function UserProfileContent({
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {likedProducts.map((p) => (
+              {likedProducts.map(p => (
                 <ProductCard
                   key={p.id}
                   {...p}
@@ -272,7 +272,7 @@ async function UserProfileContent({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {followers.map((u) => (
+              {followers.map(u => (
                 <UserListItem
                   key={u.id}
                   id={u.id}
@@ -295,7 +295,7 @@ async function UserProfileContent({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {following.map((u) => (
+              {following.map(u => (
                 <UserListItem
                   key={u.id}
                   id={u.id}
@@ -314,7 +314,7 @@ async function UserProfileContent({
             mode={profileUser.members.length > 0 ? "visible" : "hidden"}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {profileUser.members.map((membership) => (
+              {profileUser.members.map(membership => (
                 <Link
                   key={membership.id}
                   href={`/merchants/${membership.organization.slug}`}
@@ -360,7 +360,7 @@ async function UserProfileContent({
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {followedOrgs.map((org) => {
+              {followedOrgs.map(org => {
                 const followersCount =
                   (typeof org.metadata === "string"
                     ? JSON.parse(org.metadata)

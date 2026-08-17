@@ -75,7 +75,7 @@ export function DeleteProductForm({
       <AlertDialogTrigger
         className={cn(
           "py-2 px-2.5 bg-destructive hover:bg-destructive/80 text-white rounded-md w-full flex-1",
-          className
+          className,
         )}
       >
         <Trash2 className="size-4 mx-auto" />
@@ -92,7 +92,7 @@ export function DeleteProductForm({
           <AlertDialogAction
             className="bg-destructive hover:bg-destructive/80"
             disabled={isDeletingPending}
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               handleDelete();
             }}

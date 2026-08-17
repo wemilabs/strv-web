@@ -1,9 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  allowedDevOrigins: ["192.168.1.68", "192.168.1.69"],
+  allowedDevOrigins: ["127.0.0.1", "192.168.1.68", "192.168.1.69"],
   cacheComponents: true,
-  experimental: { typedEnv: true, viewTransition: true },
+  experimental: {
+    typedEnv: true,
+    turbopackRustReactCompiler: true,
+    useOffline: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -12,6 +16,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  partialPrefetching: true,
   reactCompiler: true,
   serverExternalPackages: ["prettier"], // This package is required by @react-email/components, so we externalize it instead of installing it as a dependency
   typedRoutes: true,

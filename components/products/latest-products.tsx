@@ -21,7 +21,7 @@ function LatestProductsSkeleton() {
         </p>
 
         <div className="w-full pt-6">
-          {[1, 2, 3].map((i) => (
+          {[1, 2, 3].map(i => (
             <div key={i} className="mb-12">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ function LatestProductsSkeleton() {
               <div className="flex w-full flex-col gap-6 flex-1">
                 <div className="flex-1 pt-4">
                   <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 overflow-x-auto scrollbar-hide sm:overflow-visible">
-                    {[1, 2, 3, 4, 5, 6].map((j) => (
+                    {[1, 2, 3, 4, 5, 6].map(j => (
                       <div
                         key={j}
                         className="shrink-0 w-72 sm:shrink sm:w-auto"

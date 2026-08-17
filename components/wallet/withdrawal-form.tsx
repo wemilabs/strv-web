@@ -46,7 +46,7 @@ type WithdrawalState = {
 
 async function withdrawAction(
   _prevState: WithdrawalState,
-  formData: FormData
+  formData: FormData,
 ): Promise<WithdrawalState> {
   const organizationId = formData.get("organizationId") as string;
   const amount = parseFloat(formData.get("amount") as string);

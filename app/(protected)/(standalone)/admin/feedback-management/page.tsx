@@ -15,10 +15,10 @@ async function AdminFeedbackContent() {
 
   const stats = {
     total: allFeedback.length,
-    pending: allFeedback.filter((f) => f.status === "pending").length,
-    reviewing: allFeedback.filter((f) => f.status === "reviewing").length,
-    completed: allFeedback.filter((f) => f.status === "completed").length,
-    rejected: allFeedback.filter((f) => f.status === "rejected").length,
+    pending: allFeedback.filter(f => f.status === "pending").length,
+    reviewing: allFeedback.filter(f => f.status === "reviewing").length,
+    completed: allFeedback.filter(f => f.status === "completed").length,
+    rejected: allFeedback.filter(f => f.status === "rejected").length,
   };
 
   return (
@@ -61,7 +61,7 @@ function AdminFeedbackSkeleton() {
   return (
     <div className="space-y-7">
       <div className="grid gap-4 md:grid-cols-5">
-        {[1, 2, 3, 4, 5].map((i) => (
+        {[1, 2, 3, 4, 5].map(i => (
           <Card key={i}>
             <CardHeader className="pb-2">
               <Skeleton className="h-4 w-16" />

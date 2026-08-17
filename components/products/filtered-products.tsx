@@ -46,7 +46,7 @@ export function FilteredProducts({
 
   const effectiveSearch = searchQuery !== undefined ? searchQuery : search;
 
-  let filteredProducts = data?.filter((product) => {
+  let filteredProducts = data?.filter(product => {
     const matchesSearch =
       !effectiveSearch ||
       product.name.toLowerCase().includes(effectiveSearch.toLowerCase()) ||
@@ -56,7 +56,7 @@ export function FilteredProducts({
       product.organization?.name
         .toLowerCase()
         .includes(effectiveSearch.toLowerCase()) ||
-      product.tags?.some((tag) =>
+      product.tags?.some(tag =>
         tag.name.toLowerCase().includes(effectiveSearch.toLowerCase()),
       ) ||
       product.brand?.toLowerCase().includes(effectiveSearch.toLowerCase());
@@ -66,7 +66,7 @@ export function FilteredProducts({
 
     const matchesTags =
       tags.length === 0 ||
-      (product.tags?.some((tag) => tags.includes(tag.slug)) ?? false);
+      (product.tags?.some(tag => tags.includes(tag.slug)) ?? false);
 
     return matchesSearch && matchesStatus && matchesTags;
   });
@@ -118,7 +118,7 @@ export function FilteredProducts({
           {filteredProducts.length <= 1 ? "" : "s"}
         </div>
       </Activity>
-      {filteredProducts?.map((product) => (
+      {filteredProducts?.map(product => (
         <div
           key={product.id}
           className={`

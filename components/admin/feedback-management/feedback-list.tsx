@@ -67,7 +67,7 @@ export function FeedbackList({ feedback }: FeedbackListClientProps) {
 
   const [search] = useQueryState("search", { defaultValue: "" });
 
-  const filteredFeedback = feedback.filter((item) => {
+  const filteredFeedback = feedback.filter(item => {
     const typeMatch = selectedType === "all" || item.type === selectedType;
     const statusMatch =
       selectedStatus === "all" || item.status === selectedStatus;
@@ -87,7 +87,7 @@ export function FeedbackList({ feedback }: FeedbackListClientProps) {
           <div className="flex-1">
             <h3 className="text-sm font-medium mb-2">Type</h3>
             <div className="flex flex-wrap gap-2">
-              {feedbackTypeOptions.map((option) => (
+              {feedbackTypeOptions.map(option => (
                 <Button
                   key={option.value}
                   variant={
@@ -111,7 +111,7 @@ export function FeedbackList({ feedback }: FeedbackListClientProps) {
               <h3 className="text-sm font-medium mb-2">Status</h3>
               <Select
                 value={selectedStatus}
-                onValueChange={(value) =>
+                onValueChange={value =>
                   setSelectedStatus(value as FeedbackStatus)
                 }
               >
@@ -119,7 +119,7 @@ export function FeedbackList({ feedback }: FeedbackListClientProps) {
                   <SelectValue placeholder="Filter by status" />
                 </SelectTrigger>
                 <SelectContent>
-                  {feedbackStatusOptions.map((option) => (
+                  {feedbackStatusOptions.map(option => (
                     <SelectItem key={option.value} value={option.value}>
                       {option.label}
                     </SelectItem>

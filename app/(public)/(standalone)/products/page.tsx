@@ -9,6 +9,8 @@ import { getInStockProducts } from "@/data/products";
 import { getAllTagsWithProducts } from "@/data/tags";
 import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
+export const instant = true;
+
 // Helper function to get filtered products for metadata
 async function getFilteredProductsForMetadata(
   search?: string,
@@ -17,7 +19,7 @@ async function getFilteredProductsForMetadata(
 ) {
   const products = await getInStockProducts();
 
-  let filteredProducts = products.filter((product) => {
+  let filteredProducts = products.filter(product => {
     const matchesSearch =
       !search ||
       product.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -27,7 +29,7 @@ async function getFilteredProductsForMetadata(
     const matchesTags =
       !tags ||
       tags.length === 0 ||
-      (product.tags?.some((tag) => tags.includes(tag.slug)) ?? false);
+      (product.tags?.some(tag => tags.includes(tag.slug)) ?? false);
 
     return matchesSearch && matchesTags;
   });
@@ -183,7 +185,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${title} - Starva.shop`,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
   };
 }

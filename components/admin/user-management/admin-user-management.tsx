@@ -41,14 +41,14 @@ export function AdminUserManagement() {
 
   const [{ search, status, page }, setFilters] = useQueryStates(
     {
-      search: { defaultValue: "", parse: (v) => v || "" },
+      search: { defaultValue: "", parse: v => v || "" },
       status: parseAsStringLiteral(statusOptions).withDefault("all"),
       page: parseAsInteger.withDefault(1),
     },
     {
       shallow: true,
       throttleMs: 300,
-    }
+    },
   );
 
   const {
@@ -92,7 +92,7 @@ export function AdminUserManagement() {
       userId: string;
       data: { name?: string; emailVerified?: boolean };
     }) => updateUserAdmin(userId, data),
-    onSuccess: (result) => {
+    onSuccess: result => {
       if (result.success) {
         toast.success(result.message);
         queryClient.invalidateQueries({ queryKey: ["admin-users"] });
@@ -101,7 +101,7 @@ export function AdminUserManagement() {
         toast.error(result.message);
       }
     },
-    onError: (error) => {
+    onError: error => {
       console.error("Failed to update user:", error);
       toast.error("Failed to update user");
     },
@@ -109,7 +109,7 @@ export function AdminUserManagement() {
 
   const deleteUserMutation = useMutation({
     mutationFn: deleteUserAdmin,
-    onSuccess: (result) => {
+    onSuccess: result => {
       if (result.success) {
         toast.success(result.message);
         queryClient.invalidateQueries({ queryKey: ["admin-users"] });
@@ -118,7 +118,7 @@ export function AdminUserManagement() {
         toast.error(result.message);
       }
     },
-    onError: (error) => {
+    onError: error => {
       console.error("Failed to delete user:", error);
       toast.error("Failed to delete user");
     },
@@ -126,7 +126,7 @@ export function AdminUserManagement() {
 
   const handleUserUpdate = (
     userId: string,
-    data: { name?: string; emailVerified?: boolean }
+    data: { name?: string; emailVerified?: boolean },
   ) => {
     updateUserMutation.mutate({ userId, data });
   };
@@ -144,14 +144,14 @@ export function AdminUserManagement() {
   const handleExport = () => {
     const csvContent = [
       ["Name", "Email", "Status", "Joined", "Businesses"].join(","),
-      ...(usersData?.users || []).map((user) =>
+      ...(usersData?.users || []).map(user =>
         [
           user.name,
           user.email,
           user.emailVerified ? "Active" : "Inactive",
           new Date(user.createdAt).toLocaleDateString(),
           user.members?.length || 0,
-        ].join(",")
+        ].join(","),
       ),
     ].join("\n");
 
@@ -209,9 +209,7 @@ export function AdminUserManagement() {
               <Input
                 placeholder="Search users or businesses..."
                 value={search}
-                onChange={(e) =>
-                  setFilters({ search: e.target.value, page: 1 })
-                }
+                onChange={e => setFilters({ search: e.target.value, page: 1 })}
                 className="px-8 placeholder:text-sm text-sm"
               />
               <Activity mode={search ? "visible" : "hidden"}>

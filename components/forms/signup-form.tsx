@@ -60,7 +60,7 @@ export function SignUpForm({
         const { success, message } = await signUpUser(
           values.email,
           values.password,
-          values.username
+          values.username,
         );
         if (success) {
           toast.info(message, {
@@ -103,7 +103,7 @@ export function SignUpForm({
                         const e = error as Error;
                         console.error(e.message);
                         toast.error(
-                          "Something went wrong. Please try again later."
+                          "Something went wrong. Please try again later.",
                         );
                       }
                     })

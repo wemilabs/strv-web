@@ -1,6 +1,6 @@
 // Service Worker for Push Notifications
 
-self.addEventListener("push", (event) => {
+self.addEventListener("push", event => {
   if (!event.data) return;
 
   let data;
@@ -31,7 +31,7 @@ self.addEventListener("push", (event) => {
 });
 
 // Handle notification click
-self.addEventListener("notificationclick", (event) => {
+self.addEventListener("notificationclick", event => {
   event.notification.close();
 
   const url = event.notification.data?.url || "/";
@@ -46,7 +46,7 @@ self.addEventListener("notificationclick", (event) => {
   event.waitUntil(
     clients
       .matchAll({ type: "window", includeUncontrolled: true })
-      .then((clientList) => {
+      .then(clientList => {
         for (const client of clientList) {
           if (client.url.includes(self.location.origin) && "focus" in client) {
             client.navigate(url);
@@ -54,21 +54,21 @@ self.addEventListener("notificationclick", (event) => {
           }
         }
         return clients.openWindow(url);
-      })
+      }),
   );
 });
 
 // Handle notification close
-self.addEventListener("notificationclose", (_event) => {
+self.addEventListener("notificationclose", _event => {
   // Can track dismissed notifications here if needed
 });
 
 // Service worker install
-self.addEventListener("install", (_event) => {
+self.addEventListener("install", _event => {
   self.skipWaiting();
 });
 
 // Service worker activate
-self.addEventListener("activate", (event) => {
+self.addEventListener("activate", event => {
   event.waitUntil(clients.claim());
 });

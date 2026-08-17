@@ -32,7 +32,7 @@ export async function initiateSubscriptionPayment(data: {
 
   const { session } = verified;
 
-  const plan = PRICING_PLANS.find((p) => p.name === data.planName);
+  const plan = PRICING_PLANS.find(p => p.name === data.planName);
   const priceUSD =
     data.billingPeriod === "yearly" ? plan?.yearlyPrice : plan?.monthlyPrice;
   if (!plan || priceUSD === null || priceUSD === 0)
@@ -140,7 +140,7 @@ async function processSuccessfulPayment(
 
   if (!paymentRecord.planName) return;
 
-  const plan = PRICING_PLANS.find((p) => p.name === paymentRecord.planName);
+  const plan = PRICING_PLANS.find(p => p.name === paymentRecord.planName);
   if (!plan) return;
 
   const billingPeriod =
@@ -231,7 +231,7 @@ export async function getUserPayments(limit = 10) {
     limit,
   });
 
-  return payments.map((p) => ({
+  return payments.map(p => ({
     ...p,
     amount: decrypt(p.amount),
     phoneNumber: decrypt(p.phoneNumber),

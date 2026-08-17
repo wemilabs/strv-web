@@ -26,7 +26,7 @@ export const getAllStoresWithFollowData = cache(async () => {
 
   if (!stores || stores.length === 0) return null;
 
-  const storeIds = stores.map((s) => s.id);
+  const storeIds = stores.map(s => s.id);
 
   const productCounts = await db
     .select({
@@ -38,7 +38,7 @@ export const getAllStoresWithFollowData = cache(async () => {
     .groupBy(product.organizationId);
 
   const productCountMap = new Map(
-    productCounts.map((p) => [p.organizationId, p.count]),
+    productCounts.map(p => [p.organizationId, p.count]),
   );
 
   let followedOrgIds = new Set<string>();
@@ -48,10 +48,10 @@ export const getAllStoresWithFollowData = cache(async () => {
       .from(userFollowOrganization)
       .where(eq(userFollowOrganization.userId, userId));
 
-    followedOrgIds = new Set(followedOrgs.map((f) => f.organizationId));
+    followedOrgIds = new Set(followedOrgs.map(f => f.organizationId));
   }
 
-  return stores.map((store) => {
+  return stores.map(store => {
     const metadata = parseOrgMetadata(store.metadata);
     return {
       ...store,
@@ -72,12 +72,12 @@ export async function getStoresPerUser() {
   const stores = await db.query.organization.findMany({
     where: inArray(
       organization.id,
-      members.map((member) => member.organizationId),
+      members.map(member => member.organizationId),
     ),
     orderBy: (organization, { desc }) => [desc(organization.createdAt)],
   });
 
-  const storeIds = stores.map((s) => s.id);
+  const storeIds = stores.map(s => s.id);
 
   const productCounts = await db
     .select({
@@ -89,10 +89,10 @@ export async function getStoresPerUser() {
     .groupBy(product.organizationId);
 
   const productCountMap = new Map(
-    productCounts.map((p) => [p.organizationId, p.count]),
+    productCounts.map(p => [p.organizationId, p.count]),
   );
 
-  return stores.map((store) => ({
+  return stores.map(store => ({
     ...store,
     productsCount: productCountMap.get(store.id) ?? 0,
   }));

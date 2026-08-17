@@ -24,9 +24,7 @@ export async function getUserSubscription(userId: string) {
 
   if (!currentSubscription) return null;
 
-  const plan = PRICING_PLANS.find(
-    (p) => p.name === currentSubscription.planName,
-  );
+  const plan = PRICING_PLANS.find(p => p.name === currentSubscription.planName);
 
   return {
     ...currentSubscription,
@@ -49,7 +47,7 @@ export async function createSubscription(
   planName: string,
   billingPeriod: BillingPeriod = "monthly",
 ) {
-  const plan = PRICING_PLANS.find((p) => p.name === planName);
+  const plan = PRICING_PLANS.find(p => p.name === planName);
   if (!plan) throw new Error(`Invalid plan name: ${planName}`);
 
   const trialEndsAt = new Date();
@@ -79,7 +77,7 @@ export async function updateSubscription(
   billingPeriod?: BillingPeriod,
 ) {
   const existingSubscription = await getUserSubscription(userId);
-  const plan = PRICING_PLANS.find((p) => p.name === planName);
+  const plan = PRICING_PLANS.find(p => p.name === planName);
   if (!plan) throw new Error(`Invalid plan name: ${planName}`);
 
   if (!existingSubscription)
@@ -141,7 +139,7 @@ export async function scheduleDowngrade(userId: string, newPlanName: string) {
     throw new Error("No subscription found");
   }
 
-  const plan = PRICING_PLANS.find((p) => p.name === newPlanName);
+  const plan = PRICING_PLANS.find(p => p.name === newPlanName);
   if (!plan) throw new Error(`Invalid plan name: ${newPlanName}`);
 
   // Schedule the downgrade for the end of the current billing period
@@ -192,7 +190,7 @@ export async function applyScheduledDowngrades() {
   for (const sub of dueDowngrades) {
     if (!sub.scheduledPlanName) continue;
 
-    const plan = PRICING_PLANS.find((p) => p.name === sub.scheduledPlanName);
+    const plan = PRICING_PLANS.find(p => p.name === sub.scheduledPlanName);
     if (!plan) continue;
 
     await db
@@ -229,7 +227,7 @@ export async function checkOrganizationLimit(userId: string) {
   }
 
   const userSub = await getUserSubscription(userId);
-  const starterPlan = PRICING_PLANS.find((p) => p.name === "Starter");
+  const starterPlan = PRICING_PLANS.find(p => p.name === "Starter");
   const defaultMaxOrgs = starterPlan?.maxOrgs ?? 3;
 
   if (
@@ -287,7 +285,7 @@ export async function checkProductLimit(organizationId: string) {
     };
   }
 
-  const starterPlan = PRICING_PLANS.find((p) => p.name === "Starter");
+  const starterPlan = PRICING_PLANS.find(p => p.name === "Starter");
   const defaultMaxProducts = starterPlan?.maxProductsPerOrg ?? 30;
   const userSub = await getUserSubscription(orgOwner.userId);
 
@@ -357,7 +355,7 @@ export async function checkOrderLimit(organizationId: string) {
     };
   }
 
-  const starterPlan = PRICING_PLANS.find((p) => p.name === "Starter");
+  const starterPlan = PRICING_PLANS.find(p => p.name === "Starter");
   const defaultMaxOrders = starterPlan?.orderLimit ?? 200;
   const userSub = await getUserSubscription(orgOwner.userId);
 

@@ -84,14 +84,14 @@ export function InventoryTable({
   };
 
   const toggleColumn = (column: keyof ColumnVisibility) => {
-    setColumnVisibility((prev) => ({
+    setColumnVisibility(prev => ({
       ...prev,
       [column]: !prev[column],
     }));
   };
 
   // Filter products by search query
-  let filtered = products.filter((product) =>
+  let filtered = products.filter(product =>
     product.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
@@ -129,11 +129,11 @@ export function InventoryTable({
   );
 
   const handlePreviousPage = () => {
-    setCurrentPage((prev) => Math.max(1, prev - 1));
+    setCurrentPage(prev => Math.max(1, prev - 1));
   };
 
   const handleNextPage = () => {
-    setCurrentPage((prev) => Math.min(totalPages, prev + 1));
+    setCurrentPage(prev => Math.min(totalPages, prev + 1));
   };
 
   return (
@@ -143,7 +143,7 @@ export function InventoryTable({
         <Input
           placeholder="Filter products..."
           value={searchQuery}
-          onChange={(e) => {
+          onChange={e => {
             void setSearchQuery(e.target.value);
             setCurrentPage(1);
           }}
@@ -271,7 +271,7 @@ export function InventoryTable({
                 </td>
               </tr>
             ) : (
-              paginatedProducts.map((product) => {
+              paginatedProducts.map(product => {
                 const isLowStock =
                   product.currentStock <= product.lowStockThreshold;
                 const isOutOfStock = product.currentStock === 0;

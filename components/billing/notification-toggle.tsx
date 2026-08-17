@@ -23,7 +23,7 @@ export function NotificationToggle() {
       const result = await subscribe();
       if (result.success) {
         toast.success(
-          "Notifications enabled! You'll receive renewal reminders."
+          "Notifications enabled! You'll receive renewal reminders.",
         );
       } else if (result.error === "Permission denied") {
         toast.error("Please enable notifications in your browser settings");

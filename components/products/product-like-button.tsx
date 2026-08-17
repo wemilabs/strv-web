@@ -35,7 +35,7 @@ export function ProductLikeButton({
     OptimisticState
   >(
     { isLiked: initialIsLiked, likesCount: initialLikesCount },
-    (_, newState) => newState
+    (_, newState) => newState,
   );
 
   const handleLike = (e: React.MouseEvent) => {
@@ -79,7 +79,7 @@ export function ProductLikeButton({
       <Heart
         className={cn(
           "transition-colors size-4",
-          optimisticState.isLiked && "text-primary"
+          optimisticState.isLiked && "text-primary",
         )}
         fill={optimisticState.isLiked ? "var(--primary)" : "none"}
         aria-hidden="true"

@@ -33,8 +33,8 @@ export async function GET(request: Request) {
           eq(subscription.status, "active"),
           lte(subscription.currentPeriodEnd, in7Days),
           gt(subscription.currentPeriodEnd, in3Days),
-          isNull(subscription.renewalReminderSentAt)
-        )
+          isNull(subscription.renewalReminderSentAt),
+        ),
       );
 
     // Get subscriptions expiring in 3 days (urgent reminder)
@@ -46,8 +46,8 @@ export async function GET(request: Request) {
           eq(subscription.status, "active"),
           lte(subscription.currentPeriodEnd, in3Days),
           gt(subscription.currentPeriodEnd, tomorrow),
-          isNull(subscription.finalReminderSentAt)
-        )
+          isNull(subscription.finalReminderSentAt),
+        ),
       );
 
     // Get subscriptions expiring tomorrow (final reminder)
@@ -58,8 +58,8 @@ export async function GET(request: Request) {
         and(
           eq(subscription.status, "active"),
           lte(subscription.currentPeriodEnd, tomorrow),
-          gt(subscription.currentPeriodEnd, now)
-        )
+          gt(subscription.currentPeriodEnd, now),
+        ),
       );
 
     // Get expired subscriptions
@@ -69,8 +69,8 @@ export async function GET(request: Request) {
       .where(
         and(
           eq(subscription.status, "active"),
-          lte(subscription.currentPeriodEnd, now)
-        )
+          lte(subscription.currentPeriodEnd, now),
+        ),
       );
 
     // Process 7-day reminders
@@ -110,14 +110,14 @@ export async function GET(request: Request) {
     console.error("Cron job error:", error);
     return NextResponse.json(
       { error: "Failed to process renewals" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 async function sendRenewalReminder(
   sub: typeof subscription.$inferSelect,
-  timing: "7d" | "3d" | "1d"
+  timing: "7d" | "3d" | "1d",
 ) {
   const messages = {
     "7d": {

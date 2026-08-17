@@ -117,11 +117,11 @@ function AnimatedGroup({
 
   const MotionComponent = useMemo(
     () => motion.create(as as keyof React.JSX.IntrinsicElements),
-    [as]
+    [as],
   );
   const MotionChild = useMemo(
     () => motion.create(asChild as keyof React.JSX.IntrinsicElements),
-    [asChild]
+    [asChild],
   );
 
   return (

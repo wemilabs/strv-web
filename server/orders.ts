@@ -51,7 +51,7 @@ export async function createOrderForUser(input: CreateOrderInput) {
   const { items, notes, deliveryLocation } = parsed.data;
 
   try {
-    const productIds = items.map((item) => item.productId);
+    const productIds = items.map(item => item.productId);
     const products = await db.query.product.findMany({
       where: (product, { inArray }) => inArray(product.id, productIds),
       with: {
@@ -62,7 +62,7 @@ export async function createOrderForUser(input: CreateOrderInput) {
     if (products.length !== items.length)
       return { ok: false, error: "One or more products not found" };
 
-    const organizationIds = [...new Set(products.map((p) => p.organizationId))];
+    const organizationIds = [...new Set(products.map(p => p.organizationId))];
     if (organizationIds.length > 1)
       return {
         ok: false,
@@ -97,15 +97,13 @@ export async function createOrderForUser(input: CreateOrderInput) {
 
     const stockWarnings: string[] = [];
     for (const item of items) {
-      const productStock = stockCheck.stocks.find(
-        (s) => s.id === item.productId,
-      );
+      const productStock = stockCheck.stocks.find(s => s.id === item.productId);
       if (productStock?.inventoryEnabled) {
         const availableStock = productStock.currentStock || 0;
         if (item.quantity > availableStock)
           stockWarnings.push(
             `Only ${availableStock} units available for ${
-              products.find((p) => p.id === item.productId)?.name
+              products.find(p => p.id === item.productId)?.name
             }, but ${
               item.quantity
             } requested. Order will be confirmed when stock is available.`,
@@ -114,8 +112,8 @@ export async function createOrderForUser(input: CreateOrderInput) {
     }
 
     let totalPrice = 0;
-    const orderItems = items.map((item) => {
-      const productData = products.find((p) => p.id === item.productId);
+    const orderItems = items.map(item => {
+      const productData = products.find(p => p.id === item.productId);
       if (!productData) throw new Error("Product not found");
 
       let priceAtOrder = productData.price;
@@ -171,7 +169,7 @@ export async function createOrderForUser(input: CreateOrderInput) {
       .returning();
 
     await db.insert(orderItem).values(
-      orderItems.map((item) => ({
+      orderItems.map(item => ({
         orderId: newOrder.id,
         productId: item.productId,
         quantity: item.quantity,
@@ -361,7 +359,7 @@ export async function updateOrderStatus(
       });
 
       // Validate stock availability before confirming
-      const productIds = orderItems.map((item) => item.productId);
+      const productIds = orderItems.map(item => item.productId);
       const stockCheck = await getProductsStock({
         productIds,
         organizationId: existingOrder.organizationId,
@@ -371,7 +369,7 @@ export async function updateOrderStatus(
         // Check each item against current stock
         for (const item of orderItems) {
           const productStock = stockCheck.stocks.find(
-            (s) => s.id === item.productId,
+            s => s.id === item.productId,
           );
           if (productStock?.inventoryEnabled) {
             const availableStock = productStock.currentStock || 0;
@@ -664,7 +662,7 @@ export async function cancelOrderForUser(orderId: string, userId: string) {
       const actionUrl = `/point-of-sales/orders/${existingOrder.id}`;
 
       await Promise.allSettled(
-        orgMembers.map((m) =>
+        orgMembers.map(m =>
           createNotification({
             userId: m.userId,
             type: "general",
@@ -767,7 +765,7 @@ export async function markOrderAsDelivered(
     const actionUrl = `/point-of-sales/orders/${existingOrder.id}`;
 
     await Promise.allSettled(
-      orgMembers.map((m) =>
+      orgMembers.map(m =>
         createNotification({
           userId: m.userId,
           type: "general",
@@ -854,13 +852,13 @@ export async function getOrganizationAnalyticsOverview(
 
   const weekdayOrder = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-  const starterSeries = weekdayOrder.map((day) => ({
+  const starterSeries = weekdayOrder.map(day => ({
     day,
     orders: byDay[day] || 0,
   }));
 
   const weekLabels = ["Week 1", "Week 2", "Week 3", "Week 4"];
-  const growthSeries = weekLabels.map((label) => ({
+  const growthSeries = weekLabels.map(label => ({
     label,
     revenue: byWeek[label] || 0,
   }));
@@ -882,7 +880,7 @@ export async function getOrganizationAnalyticsOverview(
   // Pro analytics: Product performance (top products by revenue)
   const orderItems = await db.query.orderItem.findMany({
     where: (item, { eq, inArray }) => {
-      const orderIds = orders.map((o) => o.id);
+      const orderIds = orders.map(o => o.id);
       return orderIds.length > 0
         ? inArray(item.orderId, orderIds)
         : eq(item.orderId, ""); // No orders

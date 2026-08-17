@@ -71,7 +71,7 @@ export function ImageCarousel({
           src={video}
           controls
           className={cn("absolute inset-0 size-full object-cover", className)}
-          onContextMenu={(e) => e.preventDefault()}
+          onContextMenu={e => e.preventDefault()}
         >
           <track kind="captions" />
         </video>
@@ -83,7 +83,7 @@ export function ImageCarousel({
           sizes="(max-width: 768px) 100vw, 50vw"
           preload
           className={cn("object-cover", className)}
-          onContextMenu={(e) => e.preventDefault()}
+          onContextMenu={e => e.preventDefault()}
         />
       )}
 

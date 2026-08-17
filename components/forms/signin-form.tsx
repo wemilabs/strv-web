@@ -59,7 +59,7 @@ export const SignInForm = ({
       try {
         const { success, message } = await signInUser(
           values.email,
-          values.password
+          values.password,
         );
         if (success) {
           toast.success(message);
@@ -101,7 +101,7 @@ export const SignInForm = ({
                         const e = error as Error;
                         console.error(e.message);
                         toast.error(
-                          "Something went wrong. Please try again later."
+                          "Something went wrong. Please try again later.",
                         );
                       }
                     })

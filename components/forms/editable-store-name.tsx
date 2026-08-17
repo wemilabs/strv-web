@@ -14,7 +14,7 @@ interface EditableStoreNameProps {
   updateAction: (
     storeId: string,
     storeSlug: string,
-    name: string
+    name: string,
   ) => Promise<void>;
 }
 
@@ -78,7 +78,7 @@ export function EditableStoreName({
           ref={inputRef}
           type="text"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={isPending}
           className="text-3xl md:text-5xl font-semibold px-3 py-6 max-w-[500px]"

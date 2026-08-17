@@ -182,7 +182,7 @@ export function StockAdjustment({
                       min="1"
                       placeholder="Enter quantity"
                       {...field}
-                      onChange={(e) => field.onChange(Number(e.target.value))}
+                      onChange={e => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
                   <p className="text-sm text-muted-foreground">
@@ -192,7 +192,7 @@ export function StockAdjustment({
                         ? product.currentStock + (field.value || 0)
                         : Math.max(
                             0,
-                            product.currentStock - (field.value || 0)
+                            product.currentStock - (field.value || 0),
                           )}
                     </span>
                   </p>

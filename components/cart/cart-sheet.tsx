@@ -84,11 +84,11 @@ export function CartSheet() {
   // Refresh stock levels when cart opens
   useEffect(() => {
     if (isOpen && items.length > 0 && session?.session?.activeOrganizationId) {
-      const productIds = items.map((item) => item.productId);
+      const productIds = items.map(item => item.productId);
       getProductsStock({
         productIds,
         organizationId: session.session.activeOrganizationId,
-      }).then((result) => {
+      }).then(result => {
         if (result.ok) {
           refreshStock([...result.stocks]);
         }
@@ -112,7 +112,7 @@ export function CartSheet() {
 
     startTransition(async () => {
       const result = await placeOrder({
-        items: items.map((item) => ({
+        items: items.map(item => ({
           productId: item.productId,
           quantity: item.quantity,
           notes: item.notes,
@@ -199,7 +199,7 @@ export function CartSheet() {
           <>
             <ScrollArea className="flex-1 h-[calc(100%-29rem)] px-4">
               <div className="space-y-4">
-                {items.map((item) => (
+                {items.map(item => (
                   <div
                     key={item.productId}
                     className="space-y-3 rounded-lg border p-3"
@@ -274,7 +274,7 @@ export function CartSheet() {
                               : undefined
                           }
                           value={item.quantity}
-                          onChange={(e) =>
+                          onChange={e =>
                             handleQuantityChange(
                               item.productId,
                               Number.parseInt(e.target.value, 10) || 1,
@@ -314,7 +314,7 @@ export function CartSheet() {
                       <Textarea
                         id={`notes-${item.productId}`}
                         value={item.notes || ""}
-                        onChange={(e) =>
+                        onChange={e =>
                           updateNotes(item.productId, e.target.value)
                         }
                         placeholder="Special instructions..."
@@ -340,7 +340,7 @@ export function CartSheet() {
                 <Textarea
                   id="order-notes"
                   value={orderNotes}
-                  onChange={(e) => setOrderNotes(e.target.value)}
+                  onChange={e => setOrderNotes(e.target.value)}
                   placeholder="Any special instructions for the entire order..."
                   rows={3}
                   className="placeholder:text-sm"
@@ -348,14 +348,14 @@ export function CartSheet() {
               </div>
 
               {/* Real estate pricing explanation */}
-              {items.some((item) => item.category === "real-estate") && (
+              {items.some(item => item.category === "real-estate") && (
                 <div className="rounded-lg bg-blue-50 border border-blue-200 p-3 text-xs">
                   <p className="font-medium text-blue-900 mb-1">
                     Real Estate Pricing:
                   </p>
                   <ul className="space-y-1 text-blue-800">
                     {items.some(
-                      (item) =>
+                      item =>
                         item.category === "real-estate" && !item.isLandlord,
                     ) && (
                       <li>
@@ -363,7 +363,7 @@ export function CartSheet() {
                       </li>
                     )}
                     {items.some(
-                      (item) =>
+                      item =>
                         item.category === "real-estate" && item.isLandlord,
                     ) && (
                       <li>

@@ -66,9 +66,9 @@ export async function GET(
       isFollowing = !!follow;
     }
 
-    const productsWithTags = org.products.map((p) => ({
+    const productsWithTags = org.products.map(p => ({
       ...p,
-      tags: p.productTags.map((pt) => pt.tag),
+      tags: p.productTags.map(pt => pt.tag),
     }));
 
     return NextResponse.json({

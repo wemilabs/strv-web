@@ -10,7 +10,7 @@ const getUserLikedProductIds = async (userId: string): Promise<Set<string>> => {
     .select({ productId: productLike.productId })
     .from(productLike)
     .where(eq(productLike.userId, userId));
-  return new Set(likes.map((like) => like.productId));
+  return new Set(likes.map(like => like.productId));
 };
 
 export async function GET(
@@ -54,7 +54,7 @@ export async function GET(
 
     const productWithTags = {
       ...specificProduct,
-      tags: specificProduct.productTags.map((pt) => pt.tag),
+      tags: specificProduct.productTags.map(pt => pt.tag),
     };
 
     const session = await auth.api.getSession({

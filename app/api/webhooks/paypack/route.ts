@@ -122,7 +122,7 @@ async function processSuccessfulCashin(paymentRecord: Payment) {
 async function processSubscriptionPayment(paymentRecord: Payment, now: Date) {
   // biome-ignore lint/style/noNonNullAssertion: planName is checked before calling this function
   const planName = paymentRecord.planName!;
-  const plan = PRICING_PLANS.find((p) => p.name === planName);
+  const plan = PRICING_PLANS.find(p => p.name === planName);
   if (!plan) return;
 
   const periodEnd = new Date(now);

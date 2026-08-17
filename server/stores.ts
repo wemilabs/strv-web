@@ -13,7 +13,7 @@ import { getCurrentMetadata } from "./organizations";
 export async function updateStoreLogo(
   storeId: string,
   resolvedSlug: string,
-  formData: FormData
+  formData: FormData,
 ) {
   const logoUrl = String(formData.get("logoUrl") || "").trim();
   if (!logoUrl) return;
@@ -50,7 +50,7 @@ export async function updateStoreLogo(
 export async function updateStoreName(
   storeId: string,
   storeSlug: string,
-  name: string
+  name: string,
 ) {
   const trimmedName = name.trim();
   if (!trimmedName) return;
@@ -71,7 +71,7 @@ export async function updateStoreName(
 export async function updateStoreDescription(
   storeId: string,
   storeSlug: string,
-  description: string
+  description: string,
 ) {
   const trimmedDescription = description.trim();
 
@@ -97,7 +97,7 @@ export async function updateStorePhone(
   storeId: string,
   storeSlug: string,
   phoneType: "notifications" | "payments",
-  phoneNumber: string
+  phoneNumber: string,
 ) {
   const trimmedPhone = phoneNumber.trim();
 
@@ -126,7 +126,7 @@ export async function updateStorePhone(
 export async function updateStoreTimetable(
   storeId: string,
   storeSlug: string,
-  timetable: Record<string, { open: string; close: string; closed: boolean }>
+  timetable: Record<string, { open: string; close: string; closed: boolean }>,
 ) {
   const currentMetadata = await getCurrentMetadata(storeId);
 
@@ -148,7 +148,7 @@ export async function updateStoreTimetable(
 
 export async function updateStoreTimezone(
   _prevState: { success: boolean; error: string | null },
-  formData: FormData
+  formData: FormData,
 ) {
   const storeId = formData.get("storeId") as string;
   const storeSlug = formData.get("storeSlug") as string;

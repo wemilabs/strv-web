@@ -56,7 +56,7 @@ export async function submitFeedback(data: SubmitFeedbackInput) {
 export async function updateFeedbackStatus(
   feedbackId: string,
   newStatus: FeedbackStatus,
-  note?: string
+  note?: string,
 ) {
   const sessionData = await verifySession();
 

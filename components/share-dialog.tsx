@@ -151,7 +151,7 @@ export function ShareDialog({
               value={url}
               readOnly
               className="font-mono text-sm"
-              onClick={(e) => e.currentTarget.select()}
+              onClick={e => e.currentTarget.select()}
             />
           </div>
         </div>

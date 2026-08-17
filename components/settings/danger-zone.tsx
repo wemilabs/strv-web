@@ -38,7 +38,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
     {
       success: false,
       error: null,
-    }
+    },
   );
   const [resetConfirmText, setResetConfirmText] = useState("");
   const [resetDialogOpen, setResetDialogOpen] = useState(false);
@@ -84,7 +84,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
 
           <AlertDialog
             open={resetDialogOpen && !resetState.success}
-            onOpenChange={(open) => {
+            onOpenChange={open => {
               if (!isResetting) {
                 setResetDialogOpen(open);
                 if (!open) setResetConfirmText("");
@@ -112,7 +112,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
                   </p>
                   <Input
                     value={resetConfirmText}
-                    onChange={(e) => setResetConfirmText(e.target.value)}
+                    onChange={e => setResetConfirmText(e.target.value)}
                     placeholder="Type RESET to confirm"
                     className="w-full placeholder:text-sm"
                   />
@@ -120,7 +120,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
               </div>
 
               <form
-                action={(formData) => {
+                action={formData => {
                   resetFormAction(formData);
                   refetchActiveStore();
                   refetchStores();
@@ -188,7 +188,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
 
           <AlertDialog
             open={deleteDialogOpen}
-            onOpenChange={(open) => {
+            onOpenChange={open => {
               if (!isDeletingUserAccount) {
                 setDeleteDialogOpen(open);
                 if (!open) setDeleteConfirmText("");
@@ -216,7 +216,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
                   </p>
                   <Input
                     value={deleteConfirmText}
-                    onChange={(e) => setDeleteConfirmText(e.target.value)}
+                    onChange={e => setDeleteConfirmText(e.target.value)}
                     placeholder="Type DELETE to confirm"
                     className="w-full placeholder:text-sm"
                   />
@@ -224,7 +224,7 @@ export function DangerZone({ userId }: DangerZoneProps) {
               </div>
 
               <form
-                onSubmit={(e) => {
+                onSubmit={e => {
                   e.preventDefault();
                   if (
                     deleteConfirmText === "DELETE" &&

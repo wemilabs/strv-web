@@ -174,7 +174,7 @@ export function PayOrderButton({
                 id="phone"
                 placeholder="78XXXXXXX"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
+                onChange={e => setPhone(e.target.value.replace(/\D/g, ""))}
                 disabled={status === "pending" || status === "polling"}
                 maxLength={9}
                 className="rounded-l-none"

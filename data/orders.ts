@@ -11,7 +11,7 @@ import { decrypt } from "@/lib/encryption";
 function decryptOrderItems<
   T extends { priceAtOrder: string; subtotal: string },
 >(items: T[]): T[] {
-  return items.map((item) => ({
+  return items.map(item => ({
     ...item,
     priceAtOrder: decrypt(item.priceAtOrder),
     subtotal: decrypt(item.subtotal),
@@ -114,7 +114,7 @@ export const getOrdersByOrganization = cache(async (organizationId: string) => {
   });
 
   const ordersWithNumbers = await Promise.all(
-    orders.map(async (ord) => {
+    orders.map(async ord => {
       const merchantOrderNumber = await calculateMerchantOrderNumberPerOrg(
         organizationId,
         ord.createdAt,
@@ -258,7 +258,7 @@ export const getOrdersByUser = cache(async (userId: string) => {
   });
 
   const ordersWithNumbers = await Promise.all(
-    orders.map(async (ord) => {
+    orders.map(async ord => {
       const customerOrderNumber =
         await calculateCustomerOrderNumberPerUserPerOrg(
           userId,
@@ -304,7 +304,7 @@ export async function getOrdersByUserForMobile(userId: string) {
     orderBy: [desc(order.createdAt)],
   });
 
-  return orders.map((ord) => ({
+  return orders.map(ord => ({
     ...decryptOrder(ord),
     orderItems: decryptOrderItems(ord.orderItems),
   }));
@@ -436,7 +436,7 @@ export const getOrdersByStatus = cache(
     });
 
     const ordersWithNumbers = await Promise.all(
-      orders.map(async (ord) => {
+      orders.map(async ord => {
         const merchantOrderNumber = await calculateMerchantOrderNumberPerOrg(
           organizationId,
           ord.createdAt,
@@ -498,7 +498,7 @@ export const getOrderStats = cache(
 
     return {
       ok: true,
-      stats: Object.values(statsByStatus).map((s) => ({
+      stats: Object.values(statsByStatus).map(s => ({
         status: s.status,
         count: s.count,
         totalRevenue: String(s.totalRevenue),
@@ -558,7 +558,7 @@ export const getRecentOrders = cache(
     });
 
     const ordersWithNumbers = await Promise.all(
-      orders.map(async (ord) => {
+      orders.map(async ord => {
         const merchantOrderNumber = await calculateMerchantOrderNumberPerOrg(
           organizationId,
           ord.createdAt,

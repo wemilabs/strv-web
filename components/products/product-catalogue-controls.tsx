@@ -50,7 +50,7 @@ export function ProductCatalogueControls({
   const pathname = usePathname();
   const [status, setStatus] = useQueryState(
     "status",
-    parseAsString.withDefault(defaultStatus)
+    parseAsString.withDefault(defaultStatus),
   );
 
   const isStorePage = pathname === `/stores/${storeSlug}`;
@@ -120,7 +120,7 @@ export function ProductCatalogueControls({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All</SelectItem>
-              {PRODUCT_STATUS_VALUES.map((statusValue) => (
+              {PRODUCT_STATUS_VALUES.map(statusValue => (
                 <SelectItem key={statusValue} value={statusValue}>
                   {removeUnderscoreAndCapitalizeOnlyTheFirstChar(statusValue)}
                 </SelectItem>

@@ -67,7 +67,7 @@ async function getAccessToken(): Promise<string> {
 async function paypackRequest(
   endpoint: string,
   method: "GET" | "POST" = "POST",
-  body?: Record<string, unknown>
+  body?: Record<string, unknown>,
 ) {
   const token = await getAccessToken();
   const response = await fetch(`${PAYPACK_BASE_URL}${endpoint}`, {
@@ -89,7 +89,7 @@ async function paypackRequest(
 
 export async function initiatePayment(
   phoneNumber: string,
-  amount: number
+  amount: number,
 ): Promise<CashinResponse> {
   const formattedPhone = formatRwandanPhone(phoneNumber);
 
@@ -105,7 +105,7 @@ export async function initiatePayment(
 
 export async function initiateCashout(
   phoneNumber: string,
-  amount: number
+  amount: number,
 ): Promise<CashoutResponse> {
   const formattedPhone = formatRwandanPhone(phoneNumber);
 
@@ -121,11 +121,11 @@ export async function initiateCashout(
 }
 
 export async function getTransactionEvents(
-  ref: string
+  ref: string,
 ): Promise<TransactionEvent[]> {
   const response = await paypackRequest(
     `/events/transactions?ref=${ref}&limit=10`,
-    "GET"
+    "GET",
   );
 
   return response.transactions as TransactionEvent[];

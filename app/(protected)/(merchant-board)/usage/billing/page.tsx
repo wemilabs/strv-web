@@ -84,7 +84,7 @@ export default function BillingPage() {
               <div className="space-y-3">
                 <Skeleton className="h-4 w-24" />
                 <div className="grid gap-2 sm:grid-cols-2">
-                  {["f1", "f2", "f3", "f4", "f5", "f6"].map((id) => (
+                  {["f1", "f2", "f3", "f4", "f5", "f6"].map(id => (
                     <Skeleton key={id} className="h-4 w-40" />
                   ))}
                 </div>
@@ -92,7 +92,7 @@ export default function BillingPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {["orgs", "products", "orders"].map((id) => (
+              {["orgs", "products", "orders"].map(id => (
                 <div
                   key={id}
                   className="rounded-lg border bg-card p-6 space-y-4"
@@ -122,7 +122,7 @@ export default function BillingPage() {
                 <Skeleton className="h-4 w-64" />
               </div>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {["upgrade", "change", "history", "report"].map((id) => (
+                {["upgrade", "change", "history", "report"].map(id => (
                   <Skeleton key={id} className="h-10 rounded-md" />
                 ))}
               </div>

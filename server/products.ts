@@ -139,7 +139,7 @@ export async function createProduct(input: z.infer<typeof productSchema>) {
       }
 
       if (tagIds.length > 0) {
-        const productTagValues = tagIds.map((tagId) => ({
+        const productTagValues = tagIds.map(tagId => ({
           productId: newProduct.id,
           tagId,
         }));
@@ -163,7 +163,7 @@ const updateProductSchema = productSchema.extend({
 });
 
 export async function updateProduct(
-  input: z.infer<typeof updateProductSchema>
+  input: z.infer<typeof updateProductSchema>,
 ) {
   const verified = await verifySession();
   if (!verified.success) return { ok: false, error: "Unauthorized" };
@@ -203,8 +203,8 @@ export async function updateProduct(
       .where(
         and(
           eq(productTable.id, productId),
-          eq(productTable.organizationId, organizationId)
-        )
+          eq(productTable.organizationId, organizationId),
+        ),
       )
       .limit(1);
 
@@ -261,8 +261,8 @@ export async function updateProduct(
       .where(
         and(
           eq(productTable.id, productId),
-          eq(productTable.organizationId, organizationId)
-        )
+          eq(productTable.organizationId, organizationId),
+        ),
       );
 
     if (tagNames) {
@@ -295,7 +295,7 @@ export async function updateProduct(
         }
 
         if (tagIds.length > 0) {
-          const productTagValues = tagIds.map((tagId) => ({
+          const productTagValues = tagIds.map(tagId => ({
             productId,
             tagId,
           }));
@@ -309,7 +309,7 @@ export async function updateProduct(
       if (oldImageUrls && oldImageUrls !== newImageUrls) {
         try {
           const oldImagesToDelete = oldImageUrls.filter(
-            (url) => !newImageUrls.includes(url)
+            url => !newImageUrls.includes(url),
           );
           for (const oldImageUrl of oldImagesToDelete) {
             const fileKey = extractFileKeyFromUrl(oldImageUrl);
@@ -321,7 +321,7 @@ export async function updateProduct(
         } catch (error: unknown) {
           const e = error as Error;
           console.error(
-            `Failed to delete old images from UploadThing: ${e.message}`
+            `Failed to delete old images from UploadThing: ${e.message}`,
           );
         }
       }
@@ -337,7 +337,7 @@ export async function updateProduct(
         } catch (error: unknown) {
           const e = error as Error;
           console.error(
-            `Failed to delete old video from UploadThing: ${e.message}`
+            `Failed to delete old video from UploadThing: ${e.message}`,
           );
         }
       }
@@ -359,7 +359,7 @@ const deleteProductSchema = z.object({
 });
 
 export async function deleteProduct(
-  input: z.infer<typeof deleteProductSchema>
+  input: z.infer<typeof deleteProductSchema>,
 ) {
   const verified = await verifySession();
   if (!verified.success) return { ok: false, error: "Unauthorized" };
@@ -377,8 +377,8 @@ export async function deleteProduct(
       .where(
         and(
           eq(productTable.id, productId),
-          eq(productTable.organizationId, organizationId)
-        )
+          eq(productTable.organizationId, organizationId),
+        ),
       )
       .limit(1);
 
@@ -393,8 +393,8 @@ export async function deleteProduct(
       .where(
         and(
           eq(productTable.id, productId),
-          eq(productTable.organizationId, organizationId)
-        )
+          eq(productTable.organizationId, organizationId),
+        ),
       );
 
     after(async () => {
@@ -411,7 +411,7 @@ export async function deleteProduct(
         } catch (error: unknown) {
           const e = error as Error;
           console.error(
-            `Failed to delete images from UploadThing: ${e.message}`
+            `Failed to delete images from UploadThing: ${e.message}`,
           );
         }
       }
@@ -432,7 +432,7 @@ const toggleProductLikeSchema = z.object({
 });
 
 export async function toggleProductLike(
-  input: z.infer<typeof toggleProductLikeSchema>
+  input: z.infer<typeof toggleProductLikeSchema>,
 ) {
   const parsed = toggleProductLikeSchema.safeParse(input);
   if (!parsed.success) {
@@ -464,8 +464,8 @@ export async function toggleProductLike(
       .where(
         and(
           eq(productLike.productId, productId),
-          eq(productLike.userId, userId)
-        )
+          eq(productLike.userId, userId),
+        ),
       )
       .limit(1);
 
@@ -477,8 +477,8 @@ export async function toggleProductLike(
         .where(
           and(
             eq(productLike.productId, productId),
-            eq(productLike.userId, userId)
-          )
+            eq(productLike.userId, userId),
+          ),
         );
 
       await db

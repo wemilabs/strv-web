@@ -23,7 +23,7 @@ export function HeroCarousel({
     if (images.length <= 1) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+      setCurrentIndex(prevIndex => (prevIndex + 1) % images.length);
     }, interval);
 
     return () => clearInterval(timer);

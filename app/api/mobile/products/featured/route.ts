@@ -11,7 +11,7 @@ const getUserLikedProductIds = async (userId: string): Promise<Set<string>> => {
     .select({ productId: productLike.productId })
     .from(productLike)
     .where(eq(productLike.userId, userId));
-  return new Set(likes.map((like) => like.productId));
+  return new Set(likes.map(like => like.productId));
 };
 
 export async function GET() {
@@ -49,20 +49,20 @@ export async function GET() {
       orderBy: (product, { desc }) => [desc(product.createdAt)],
     });
 
-    const productsWithTags = products.map((p) => ({
+    const productsWithTags = products.map(p => ({
       ...p,
-      tags: p.productTags.map((pt) => pt.tag),
+      tags: p.productTags.map(pt => pt.tag),
     }));
 
     let productsWithLikes = productsWithTags;
     if (session?.user) {
       const likedProductIds = await getUserLikedProductIds(session.user.id);
-      productsWithLikes = productsWithTags.map((p) => ({
+      productsWithLikes = productsWithTags.map(p => ({
         ...p,
         isLiked: likedProductIds.has(p.id),
       }));
     } else {
-      productsWithLikes = productsWithTags.map((p) => ({
+      productsWithLikes = productsWithTags.map(p => ({
         ...p,
         isLiked: false,
       }));

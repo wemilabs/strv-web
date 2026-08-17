@@ -16,12 +16,14 @@ import {
 import { getAllStoresWithFollowData } from "@/data/stores";
 import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
+export const instant = true;
+
 async function MerchantsList() {
   const merchants = await getAllStoresWithFollowData();
 
   if (!merchants || merchants.length === 0) {
     return (
-      <Empty className="min-h-[400px]">
+      <Empty className="min-h-100">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <Building2 className="size-6" />
@@ -94,7 +96,7 @@ export default async function MerchantsPage() {
 
       <Suspense
         fallback={
-          <div className="w-full md:w-[380px] h-9 rounded-lg border shadow bg-background animate-pulse" />
+          <div className="w-full md:w-95 h-9 rounded-lg border shadow bg-background animate-pulse" />
         }
       >
         <SearchForm

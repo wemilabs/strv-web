@@ -22,7 +22,7 @@ export default function ErrorPage(
 }: {
   error: Error & { digest?: string };
   reset: () => void;
-}*/ { error, unstable_retry }: ErrorInfo,
+}*/ { error, retry }: ErrorInfo,
 ) {
   useEffect(() => {
     console.error("Application error:", error);
@@ -56,7 +56,7 @@ export default function ErrorPage(
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button
             // onClick={reset}
-            onClick={() => unstable_retry()}
+            onClick={() => retry()}
             variant="default"
           >
             Try again

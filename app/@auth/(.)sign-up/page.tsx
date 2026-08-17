@@ -18,7 +18,7 @@ export default function SignUpModal() {
   const isOpen = pathname === "/sign-up";
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && router.back()}>
+    <Dialog open={isOpen} onOpenChange={open => !open && router.back()}>
       <DialogContent
         className="sm:max-w-[425px] z-70"
         aria-describedby={undefined}

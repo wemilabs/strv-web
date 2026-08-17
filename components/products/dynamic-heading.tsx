@@ -22,7 +22,7 @@ export function DynamicHeading({
     {
       shallow: false,
       throttleMs: 300,
-    }
+    },
   );
 
   const headingInfo = categorySlug
