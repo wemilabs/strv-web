@@ -30,7 +30,7 @@ export function OrderStatusSelect({
   const [isPending, startTransition] = useTransition();
 
   const nextStatuses = validTransitions[currentStatus] || [];
-  const availableOptions = nextStatuses.map((status) => ({
+  const availableOptions = nextStatuses.map(status => ({
     value: status,
     label: statusLabels[status],
     disabled: status === "preparing" && !isPaid,
@@ -68,7 +68,7 @@ export function OrderStatusSelect({
           <SelectItem value={currentStatus} disabled>
             {statusLabels[currentStatus]} (current)
           </SelectItem>
-          {availableOptions.map((option) => (
+          {availableOptions.map(option => (
             <SelectItem
               key={option.value}
               value={option.value}

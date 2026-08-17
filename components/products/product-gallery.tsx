@@ -65,7 +65,7 @@ export function ProductGallery({ images, video, alt }: ProductGalleryProps) {
                 fill
                 sizes="80px"
                 className="object-cover"
-                onContextMenu={(e) => e.preventDefault()}
+                onContextMenu={e => e.preventDefault()}
               />
             </Button>
           ))}

@@ -26,7 +26,7 @@ interface EditableStorePhoneProps {
     storeId: string,
     storeSlug: string,
     phoneType: "notifications" | "payments",
-    phone: string
+    phone: string,
   ) => Promise<void>;
 }
 
@@ -103,7 +103,7 @@ export function EditableStorePhone({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {COUNTRIES.map((country) => (
+              {COUNTRIES.map(country => (
                 <SelectItem key={country.code} value={country.code}>
                   <span className="flex items-center gap-2">
                     <span>{country.flag}</span>
@@ -117,7 +117,7 @@ export function EditableStorePhone({
             ref={inputRef}
             type="tel"
             value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
+            onChange={e => setPhoneNumber(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isPending}
             placeholder="123456789"

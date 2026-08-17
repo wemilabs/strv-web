@@ -17,7 +17,7 @@ import {
 
 export async function resetAllData(
   _prevState: { success: boolean; error: string | null },
-  formData: FormData
+  formData: FormData,
 ) {
   const userId = formData.get("userId") as string;
 
@@ -45,13 +45,13 @@ export async function resetAllData(
         where: eq(order.organizationId, orgId),
         columns: { id: true },
       });
-      const orderIds = orders.map((o) => o.id);
+      const orderIds = orders.map(o => o.id);
 
       const products = await db.query.product.findMany({
         where: eq(product.organizationId, orgId),
         columns: { id: true },
       });
-      const productIds = products.map((p) => p.id);
+      const productIds = products.map(p => p.id);
 
       // Delete order items
       if (orderIds.length > 0) {

@@ -7,7 +7,7 @@ export async function POST() {
     if (!result.ok) {
       return Response.json(
         { error: result.error, count: result.count },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -20,7 +20,7 @@ export async function POST() {
     const e = error as Error;
     return Response.json(
       { error: e.message || "Failed to seed unit formats" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -47,35 +47,35 @@ const routeConfig: Record<string, (params: string[]) => Crumb[]> = {
   ],
 
   // Dynamic routes
-  "/stores/[storeSlug]": (params) => [
+  "/stores/[storeSlug]": params => [
     { label: "Stores", href: "/stores" },
     { label: formatDynamicSlug(params[0]) },
   ],
-  "/merchants/[merchantSlug]": (params) => [
+  "/merchants/[merchantSlug]": params => [
     { label: "Merchants", href: "/merchants" },
     { label: formatDynamicSlug(params[0]) },
   ],
-  "/products/[productSlug]": (params) => [
+  "/products/[productSlug]": params => [
     { label: "Products", href: "/products" },
     { label: formatDynamicSlug(params[0]) },
   ],
-  "/products/category/[categorySlug]": (params) => [
+  "/products/category/[categorySlug]": params => [
     { label: "Products", href: "/products" },
     { label: "Category" },
     { label: formatDynamicSlug(params[0]) },
   ],
-  "/point-of-sales/orders/[orderId]": (params) => [
+  "/point-of-sales/orders/[orderId]": params => [
     { label: "POS" },
     { label: "Orders", href: "/point-of-sales/orders" },
     { label: `Order #${formatDynamicSegment(params[0])}` },
   ],
-  "/point-of-sales/wallet/transactions/[transactionId]": (params) => [
+  "/point-of-sales/wallet/transactions/[transactionId]": params => [
     { label: "POS" },
     { label: "Wallet", href: "/point-of-sales/wallet" },
     { label: "Transactions" },
     { label: `Transaction #${formatDynamicSegment(params[0])}` },
   ],
-  "/users/[userId]": (params) => [
+  "/users/[userId]": params => [
     { label: "Users" },
     { label: formatDynamicSegment(params[0]) },
   ],
@@ -84,7 +84,7 @@ const routeConfig: Record<string, (params: string[]) => Crumb[]> = {
 function formatDynamicSlug(slug: string): string {
   return slug
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
 
@@ -141,7 +141,7 @@ function generateBreadcrumbsFromPath(pathname: string): Crumb[] {
     const href = `/${segments.slice(0, index + 1).join("/")}`;
     const label = segment
       .split("-")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
 
     crumbs.push({

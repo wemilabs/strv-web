@@ -107,7 +107,7 @@ export function UserStatsCards({ stats }: UserStatsCardsProps) {
               <div
                 className={cn(
                   "text-2xl font-bold font-mono tracking-tighter",
-                  className
+                  className,
                 )}
               >
                 {qty}
@@ -117,7 +117,7 @@ export function UserStatsCards({ stats }: UserStatsCardsProps) {
               </p>
             </CardContent>
           </Card>
-        )
+        ),
       )}
     </div>
   );

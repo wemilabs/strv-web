@@ -26,7 +26,7 @@ export const ourFileRouter = {
         req.nextUrl.searchParams.get("storeSlug");
 
       // Organize files by store in their names
-      const fileOverrides = files.map((file) => {
+      const fileOverrides = files.map(file => {
         const folderPrefix = storeSlug ? `${storeSlug}/` : "default-store/";
         const timestamp = Date.now();
         const randomSuffix = Math.random().toString(36).substring(2, 8);
@@ -103,7 +103,7 @@ export const ourFileRouter = {
         .replace(/[^a-zA-Z0-9_.-]/g, "_");
 
       // Organize files by sender email
-      const fileOverrides = files.map((file) => {
+      const fileOverrides = files.map(file => {
         const timestamp = Date.now();
         const randomSuffix = Math.random().toString(36).substring(2, 8);
         const newName = `emails/${sanitizedEmail}/${emailId}/${timestamp}_${randomSuffix}_${file.name}`;

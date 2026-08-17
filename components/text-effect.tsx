@@ -153,7 +153,7 @@ const AnimationComponent: React.FC<{
           {(() => {
             const charOccurrences = new Map<string, number>();
 
-            return segment.split("").map((char) => {
+            return segment.split("").map(char => {
               const occurrence = (charOccurrences.get(char) ?? 0) + 1;
               charOccurrences.set(char, occurrence);
 
@@ -275,13 +275,13 @@ export function TextEffect({
   const baseDuration = 0.3 / speedSegment;
 
   const customStagger = hasTransition(variants?.container?.visible ?? {})
-    ? (variants?.container?.visible as TargetAndTransition).transition
-        ?.staggerChildren
+    ? (variants?.container?.visible as TargetAndTransition | undefined)
+        ?.transition?.staggerChildren
     : undefined;
 
   const customDelay = hasTransition(variants?.container?.visible ?? {})
-    ? (variants?.container?.visible as TargetAndTransition).transition
-        ?.delayChildren
+    ? (variants?.container?.visible as TargetAndTransition | undefined)
+        ?.transition?.delayChildren
     : undefined;
 
   const computedVariants = {
@@ -306,7 +306,7 @@ export function TextEffect({
   // Build a local, client-side function to decide per-segment highlighting
   const normalize = (s: string) => (caseSensitive ? s : s.toLowerCase());
   const wordsSet = new Set(
-    (highlightWords ?? []).map((w) => normalize(w.trim())),
+    (highlightWords ?? []).map(w => normalize(w.trim())),
   );
   const indicesSet = new Set(highlightIndices ?? []);
 
@@ -326,7 +326,7 @@ export function TextEffect({
   };
 
   const segmentOccurrences = new Map<string, number>();
-  const keyedSegments = segments.map((segment) => {
+  const keyedSegments = segments.map(segment => {
     const occurrence = (segmentOccurrences.get(segment) ?? 0) + 1;
     segmentOccurrences.set(segment, occurrence);
 

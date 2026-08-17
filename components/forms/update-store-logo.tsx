@@ -26,14 +26,14 @@ export function UpdateStoreLogoForm({ action, className, storeSlug }: Props) {
         endpoint="storeLogo"
         className="ut-button:bg-primary ut-button:ut-readying:bg-primary/50"
         headers={{ "x-store-slug": storeSlug }}
-        onClientUploadComplete={(res) => {
+        onClientUploadComplete={res => {
           const url = res?.[0]?.ufsUrl || "";
           if (hiddenInputRef.current && url) {
             hiddenInputRef.current.value = url;
             hiddenInputRef.current.form?.requestSubmit();
           }
         }}
-        onUploadError={(err) => {
+        onUploadError={err => {
           console.error(err);
           toast.error(err?.message || "Upload failed. Please try again.");
         }}

@@ -71,7 +71,7 @@ export function NavMain({
                     </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
-                {getCategoryOptions().map((category) => (
+                {getCategoryOptions().map(category => (
                   <SidebarMenuSubItem key={category.value}>
                     <SidebarMenuSubButton asChild>
                       <Link href={`/products/category/${category.value}`}>
@@ -113,7 +113,7 @@ export function NavMain({
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
-        {items.map((item) => (
+        {items.map(item => (
           <Collapsible
             key={item.title}
             asChild
@@ -130,7 +130,7 @@ export function NavMain({
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
+                  {item.items?.map(subItem => (
                     <SidebarMenuSubItem key={subItem.title}>
                       <SidebarMenuSubButton asChild>
                         <Link href={subItem.url as Route}>

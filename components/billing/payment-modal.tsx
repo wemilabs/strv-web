@@ -56,7 +56,7 @@ export function PaymentModal({
   const pollIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const plan = PRICING_PLANS.find((p) => p.name === planName);
+  const plan = PRICING_PLANS.find(p => p.name === planName);
   const priceUSD =
     billingPeriod === "yearly" ? plan?.yearlyPrice : plan?.monthlyPrice;
   const baseAmountRWF = priceUSD ? Math.round(priceUSD * USD_TO_RWF) : 0;
@@ -187,7 +187,7 @@ export function PaymentModal({
                 id="phone"
                 placeholder="78XXXXXXX"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value.replace(/\D/g, ""))}
+                onChange={e => setPhone(e.target.value.replace(/\D/g, ""))}
                 disabled={status === "pending" || status === "polling"}
                 maxLength={9}
                 className="rounded-l-none"

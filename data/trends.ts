@@ -32,8 +32,8 @@ export const getFollowingFeed = cache(async (limit = 20) => {
     .from(userFollowUser)
     .where(eq(userFollowUser.followerId, userId));
 
-  const followedOrgIds = followedOrgs.map((f) => f.organizationId);
-  const followedUserIds = followedUsers.map((f) => f.followingId);
+  const followedOrgIds = followedOrgs.map(f => f.organizationId);
+  const followedUserIds = followedUsers.map(f => f.followingId);
 
   if (followedOrgIds.length === 0 && followedUserIds.length === 0) {
     return [];
@@ -63,7 +63,7 @@ export const getFollowingFeed = cache(async (limit = 20) => {
       .orderBy(desc(productLike.createdAt))
       .limit(Math.ceil(limit / 2));
 
-    const productIds = likedProductIds.map((l) => l.productId);
+    const productIds = likedProductIds.map(l => l.productId);
 
     if (productIds.length > 0) {
       likedByFollowedUsers = await db.query.product.findMany({
@@ -80,7 +80,7 @@ export const getFollowingFeed = cache(async (limit = 20) => {
 
   const allProducts = [...productsFromOrgs, ...likedByFollowedUsers];
   const uniqueProducts = allProducts.filter(
-    (p, index, self) => index === self.findIndex((t) => t.id === p.id),
+    (p, index, self) => index === self.findIndex(t => t.id === p.id),
   );
 
   const userLikedProductIds = await db
@@ -88,10 +88,10 @@ export const getFollowingFeed = cache(async (limit = 20) => {
     .from(productLike)
     .where(eq(productLike.userId, userId));
 
-  const likedIds = new Set(userLikedProductIds.map((l) => l.productId));
+  const likedIds = new Set(userLikedProductIds.map(l => l.productId));
 
   return uniqueProducts
-    .map((p) => ({
+    .map(p => ({
       ...p,
       isLiked: likedIds.has(p.id),
     }))
@@ -118,7 +118,7 @@ export const getTrendingProducts = cache(async (limit = 20, daysBack = 7) => {
   });
 
   if (!success || !userId) {
-    return products.map((p) => ({ ...p, isLiked: false }));
+    return products.map(p => ({ ...p, isLiked: false }));
   }
 
   const userLikedProductIds = await db
@@ -126,9 +126,9 @@ export const getTrendingProducts = cache(async (limit = 20, daysBack = 7) => {
     .from(productLike)
     .where(eq(productLike.userId, userId));
 
-  const likedIds = new Set(userLikedProductIds.map((l) => l.productId));
+  const likedIds = new Set(userLikedProductIds.map(l => l.productId));
 
-  return products.map((p) => ({
+  return products.map(p => ({
     ...p,
     isLiked: likedIds.has(p.id),
   }));
@@ -142,7 +142,7 @@ export const getTrendingMerchants = cache(async (limit = 20) => {
     limit,
   });
 
-  const orgsWithMetadata = orgs.map((org) => {
+  const orgsWithMetadata = orgs.map(org => {
     const metadata = parseOrgMetadata(org.metadata);
     return {
       ...org,
@@ -154,7 +154,7 @@ export const getTrendingMerchants = cache(async (limit = 20) => {
   orgsWithMetadata.sort((a, b) => b.followersCount - a.followersCount);
 
   if (!success || !userId) {
-    return orgsWithMetadata.map((org) => ({ ...org, isFollowing: false }));
+    return orgsWithMetadata.map(org => ({ ...org, isFollowing: false }));
   }
 
   const followedOrgs = await db
@@ -162,9 +162,9 @@ export const getTrendingMerchants = cache(async (limit = 20) => {
     .from(userFollowOrganization)
     .where(eq(userFollowOrganization.userId, userId));
 
-  const followedOrgIds = new Set(followedOrgs.map((f) => f.organizationId));
+  const followedOrgIds = new Set(followedOrgs.map(f => f.organizationId));
 
-  return orgsWithMetadata.map((org) => ({
+  return orgsWithMetadata.map(org => ({
     ...org,
     isFollowing: followedOrgIds.has(org.id),
   }));

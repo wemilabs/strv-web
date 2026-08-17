@@ -20,11 +20,11 @@ async function getFilteredProductsForMetadata(
   categorySlug: ProductCategory,
   search?: string,
   tags?: string[],
-  sort?: string
+  sort?: string,
 ) {
   const products = await getProductsByCategorySlug(categorySlug);
 
-  let filteredProducts = products.filter((product) => {
+  let filteredProducts = products.filter(product => {
     const matchesSearch =
       !search ||
       product.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -34,7 +34,7 @@ async function getFilteredProductsForMetadata(
     const matchesTags =
       !tags ||
       tags.length === 0 ||
-      (product.tags?.some((tag) => tags.includes(tag.slug)) ?? false);
+      (product.tags?.some(tag => tags.includes(tag.slug)) ?? false);
 
     return matchesSearch && matchesTags;
   });
@@ -108,14 +108,14 @@ export async function generateMetadata({
   const parsedTags = Array.isArray(tags)
     ? tags
     : tags
-    ? tags.split(",").filter(Boolean)
-    : [];
+      ? tags.split(",").filter(Boolean)
+      : [];
 
   const filteredProducts = await getFilteredProductsForMetadata(
     categorySlug,
     search,
     parsedTags,
-    sort
+    sort,
   );
   const firstProduct = filteredProducts[0];
 
@@ -221,7 +221,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${title} - Starva.shop`,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
   };
 }
@@ -246,8 +246,8 @@ async function ProductsPageContent({
   const parsedTags = Array.isArray(tags)
     ? tags
     : tags
-    ? tags.split(",").filter(Boolean)
-    : [];
+      ? tags.split(",").filter(Boolean)
+      : [];
 
   return (
     <>

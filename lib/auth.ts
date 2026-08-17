@@ -93,7 +93,7 @@ export const auth = betterAuth({
     nextCookies(),
     organization({
       ac,
-      sendInvitationEmail: async (data) => {
+      sendInvitationEmail: async data => {
         const inviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/accept-invitation/${data.id}`;
 
         await resend.emails.send({
@@ -159,13 +159,13 @@ export const auth = betterAuth({
             where: eq(order.organizationId, orgId),
             columns: { id: true },
           });
-          const orderIds = orders.map((o) => o.id);
+          const orderIds = orders.map(o => o.id);
 
           const products = await db.query.product.findMany({
             where: eq(product.organizationId, orgId),
             columns: { id: true },
           });
-          const productIds = products.map((p) => p.id);
+          const productIds = products.map(p => p.id);
 
           // Delete order items
           if (orderIds.length > 0) {

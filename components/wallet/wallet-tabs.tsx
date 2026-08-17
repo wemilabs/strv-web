@@ -55,9 +55,7 @@ export function WalletTabs({
   transactions,
   organization,
 }: WalletTabsProps) {
-  const pendingCount = transactions.filter(
-    (t) => t.status === "pending"
-  ).length;
+  const pendingCount = transactions.filter(t => t.status === "pending").length;
 
   const walletCardData: WalletCardDataProps[] = [
     {
@@ -123,7 +121,7 @@ export function WalletTabs({
                   <div
                     className={cn(
                       "text-2xl font-bold font-mono tracking-tighter",
-                      valueColor
+                      valueColor,
                     )}
                   >
                     {formatPriceInRWF(value)}
@@ -133,7 +131,7 @@ export function WalletTabs({
                   </p>
                 </CardContent>
               </Card>
-            )
+            ),
           )}
         </div>
 

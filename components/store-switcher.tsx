@@ -138,7 +138,7 @@ export function StoreSwitcher() {
                         <Link
                           href={`/stores/${store.slug}`}
                           key={store.id}
-                          onClick={(e) =>
+                          onClick={e =>
                             handleStoreChange(e, store.id, store.slug)
                           }
                         >

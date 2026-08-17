@@ -36,8 +36,8 @@ export function UnitFormatInput({
   const [search, setSearch] = useState("");
   const id = useId();
 
-  const filteredUnitFormats = availableUnitFormats.filter((format) =>
-    format.name.toLowerCase().includes(search.toLowerCase())
+  const filteredUnitFormats = availableUnitFormats.filter(format =>
+    format.name.toLowerCase().includes(search.toLowerCase()),
   );
 
   const selectUnitFormat = (format: UnitFormat) => {
@@ -50,7 +50,7 @@ export function UnitFormatInput({
     if (!search.trim()) return;
 
     const slug = slugify(search.trim());
-    const existingFormat = availableUnitFormats.find((f) => f.slug === slug);
+    const existingFormat = availableUnitFormats.find(f => f.slug === slug);
 
     if (existingFormat) {
       onUnitFormatChangeAction(existingFormat);
@@ -115,7 +115,7 @@ export function UnitFormatInput({
                 </div>
               </CommandEmpty>
               <CommandGroup>
-                {filteredUnitFormats.map((format) => (
+                {filteredUnitFormats.map(format => (
                   <CommandItem
                     key={format.id}
                     value={format.name}

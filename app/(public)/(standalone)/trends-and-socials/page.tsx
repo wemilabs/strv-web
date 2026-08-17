@@ -6,6 +6,7 @@ import {
   UserPlus,
   Users,
 } from "lucide-react";
+
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -27,12 +28,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { verifySession } from "@/data/user-session";
 import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
+export const instant = true;
+
 async function TrendsAndSocialsContent() {
   const sessionData = await verifySession();
 
   if (!sessionData.success || !sessionData.session)
     return (
-      <Empty className="min-h-[400px]">
+      <Empty className="min-h-100">
         <EmptyHeader>
           <EmptyMedia variant="icon">
             <Lock className="size-6" />
@@ -146,7 +149,7 @@ export default function TrendsAndSocialsPage() {
 
         <Suspense
           fallback={
-            <Empty className="min-h-[400px]">
+            <Empty className="min-h-100">
               <EmptyHeader>
                 <EmptyMedia variant="icon">
                   <LoaderIcon className="size-6 animate-spin" />

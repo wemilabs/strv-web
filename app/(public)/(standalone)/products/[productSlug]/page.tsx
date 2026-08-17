@@ -19,6 +19,8 @@ import {
   removeUnderscoreAndCapitalizeOnlyTheFirstChar,
 } from "@/lib/utils";
 
+export const instant = true;
+
 async function ProductDisplay({ productSlug }: { productSlug: string }) {
   const product = await getProductBySlug(productSlug);
 
@@ -197,7 +199,7 @@ export async function generateMetadata({
 
   const images: { url: string; width: number; height: number; alt: string }[] =
     product.imageUrls && product.imageUrls.length > 0
-      ? product.imageUrls.map((url) => ({
+      ? product.imageUrls.map(url => ({
           url,
           width: 1200,
           height: 630,
@@ -231,7 +233,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
     alternates: {
       canonical: productUrl,
@@ -240,7 +242,7 @@ export async function generateMetadata({
 }
 
 export default async function ProductSlugPage(
-  props: PageProps<"/products/[productSlug]">
+  props: PageProps<"/products/[productSlug]">,
 ) {
   return (
     <Suspense fallback={<ProductSlugSkeleton />}>

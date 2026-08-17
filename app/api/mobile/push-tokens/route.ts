@@ -1,6 +1,6 @@
+import { eq } from "drizzle-orm";
 import { connection, type NextRequest } from "next/server";
 import { z } from "zod";
-import { eq } from "drizzle-orm";
 
 import { db } from "@/db/drizzle";
 import { mobilePushToken } from "@/db/schema";

@@ -58,7 +58,7 @@ const schema = z
       .string()
       .min(1, "Price is required")
       .refine(
-        (v) => !Number.isNaN(Number(v)) && Number(v) >= 0,
+        v => !Number.isNaN(Number(v)) && Number(v) >= 0,
         "Enter a valid price",
       ),
     imageUrls: z.array(z.url("Provide valid URLs")).optional(),
@@ -74,7 +74,7 @@ const schema = z
     lowStockThreshold: z.number().min(0),
   })
   .refine(
-    (data) => {
+    data => {
       // If real estate and not landlord, visit fees are required
       if (data.category === "real-estate" && !data.isLandlord) {
         return data.visitFees && Number(data.visitFees) > 0;
@@ -146,7 +146,7 @@ export function EditProductForm({
           // Find and set the product's current unit format
           if (product.unitFormatId) {
             const currentFormat = unitFormatsResult.unitFormats.find(
-              (f) => f.id === product.unitFormatId,
+              f => f.id === product.unitFormatId,
             );
             setSelectedUnitFormat(currentFormat || null);
           }
@@ -166,7 +166,7 @@ export function EditProductForm({
             unitFormat:
               unitFormatsResult.ok && product.unitFormatId
                 ? unitFormatsResult.unitFormats.find(
-                    (f) => f.id === product.unitFormatId,
+                    f => f.id === product.unitFormatId,
                   ) || null
                 : null,
             inventoryEnabled: product.inventoryEnabled || false,
@@ -203,7 +203,7 @@ export function EditProductForm({
           specifications: values.specifications ?? "",
           isLandlord: values.isLandlord,
           visitFees: values.visitFees,
-          tagNames: values.tags.map((t) => t.name),
+          tagNames: values.tags.map(t => t.name),
           unitFormatId: values.unitFormat?.id || null,
           unitFormatName: values.unitFormat?.name,
           inventoryEnabled: values.inventoryEnabled,
@@ -313,7 +313,7 @@ export function EditProductForm({
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent className="z-64">
-                          {getCategoryOptions().map((category) => (
+                          {getCategoryOptions().map(category => (
                             <SelectItem
                               key={category.value}
                               value={category.value}
@@ -447,13 +447,13 @@ export function EditProductForm({
                                 content={{
                                   allowedContent: () => "Images only",
                                 }}
-                                onClientUploadComplete={(res) => {
+                                onClientUploadComplete={res => {
                                   const imageUrls =
                                     res
-                                      ?.filter((file) =>
+                                      ?.filter(file =>
                                         file.type?.startsWith("image/"),
                                       )
-                                      .map((file) => file.ufsUrl) || [];
+                                      .map(file => file.ufsUrl) || [];
                                   const currentUrls = field.value || [];
                                   const newUrls = [
                                     ...currentUrls,
@@ -461,7 +461,7 @@ export function EditProductForm({
                                   ].slice(0, 3);
                                   field.onChange(newUrls);
                                 }}
-                                onUploadError={(err) => {
+                                onUploadError={err => {
                                   console.error(err);
                                   toast.error(
                                     err?.message ||
@@ -522,9 +522,9 @@ export function EditProductForm({
                             className="ut-button:bg-primary ut-button:ut-readying:bg-primary/50"
                             headers={{ "x-store-slug": storeSlug }}
                             content={{ allowedContent: () => "Video only" }}
-                            onClientUploadComplete={(res) => {
+                            onClientUploadComplete={res => {
                               const videoUrl =
-                                res?.find((file) =>
+                                res?.find(file =>
                                   file.type?.startsWith("video/"),
                                 )?.ufsUrl || "";
                               if (videoUrl)
@@ -532,7 +532,7 @@ export function EditProductForm({
                                   shouldValidate: true,
                                 });
                             }}
-                            onUploadError={(err) => {
+                            onUploadError={err => {
                               console.error(err);
                               toast.error(
                                 err?.message ||
@@ -615,9 +615,7 @@ export function EditProductForm({
                           min="0"
                           placeholder="5"
                           {...field}
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
+                          onChange={e => field.onChange(Number(e.target.value))}
                         />
                       </FormControl>
                       <p className="text-sm text-muted-foreground">

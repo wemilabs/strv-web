@@ -61,7 +61,7 @@ export function EditStoreTimetable({
         return { success: false, message: "Failed to update timetable" };
       }
     },
-    null
+    null,
   );
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export function EditStoreTimetable({
   }, [state, onSuccessAction]);
 
   const handleDayToggle = (dayKey: string, checked: boolean) => {
-    setTimetable((prev) => ({
+    setTimetable(prev => ({
       ...prev,
       [dayKey]: { ...prev[dayKey], closed: !checked },
     }));
@@ -86,9 +86,9 @@ export function EditStoreTimetable({
   const handleTimeChange = (
     dayKey: string,
     field: "open" | "close",
-    value: string
+    value: string,
   ) => {
-    setTimetable((prev) => ({
+    setTimetable(prev => ({
       ...prev,
       [dayKey]: { ...prev[dayKey], [field]: value },
     }));
@@ -106,7 +106,7 @@ export function EditStoreTimetable({
   return (
     <ScrollArea className="h-[300px]">
       <form ref={formRef} action={action} className="space-y-4">
-        {DAYS.map((day) => {
+        {DAYS.map(day => {
           const dayData = timetable[day.key];
           const isOpen = !dayData.closed;
 
@@ -119,9 +119,7 @@ export function EditStoreTimetable({
                 <Switch
                   id={`${day.key}-toggle`}
                   checked={isOpen}
-                  onCheckedChange={(checked) =>
-                    handleDayToggle(day.key, checked)
-                  }
+                  onCheckedChange={checked => handleDayToggle(day.key, checked)}
                 />
                 <Label
                   htmlFor={`${day.key}-toggle`}
@@ -144,7 +142,7 @@ export function EditStoreTimetable({
                       id={`${day.key}-open`}
                       type="time"
                       value={dayData.open}
-                      onChange={(e) =>
+                      onChange={e =>
                         handleTimeChange(day.key, "open", e.target.value)
                       }
                       className="w-[130px]"
@@ -164,7 +162,7 @@ export function EditStoreTimetable({
                       id={`${day.key}-close`}
                       type="time"
                       value={dayData.close}
-                      onChange={(e) =>
+                      onChange={e =>
                         handleTimeChange(day.key, "close", e.target.value)
                       }
                       className="w-[130px]"

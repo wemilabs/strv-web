@@ -144,14 +144,14 @@ export function GrowthAnalyticsChart({ data }: { data: RevenuePoint[] }) {
               axisLine={false}
               width={50}
               tick={{ fontSize: 12 }}
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+              tickFormatter={value => `${(value / 1000).toFixed(0)}K`}
             />
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   hideLabel
                   indicator="line"
-                  formatter={(value) => formatPriceInRWF(Number(value))}
+                  formatter={value => formatPriceInRWF(Number(value))}
                 />
               }
               cursor={{
@@ -203,14 +203,14 @@ export function ProAnalyticsChart({ data }: { data: RevenuePoint[] }) {
               axisLine={false}
               width={50}
               tick={{ fontSize: 12 }}
-              tickFormatter={(value) => `${(value / 1000).toFixed(0)}K`}
+              tickFormatter={value => `${(value / 1000).toFixed(0)}K`}
             />
             <ChartTooltip
               content={
                 <ChartTooltipContent
                   hideLabel
                   indicator="line"
-                  formatter={(value) => formatPriceInRWF(Number(value))}
+                  formatter={value => formatPriceInRWF(Number(value))}
                 />
               }
               cursor={{

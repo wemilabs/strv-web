@@ -22,6 +22,8 @@ import { getOrganizationFollowersCount } from "@/data/trends";
 import { DAYS, GENERAL_BRANDING_IMG_URL, today } from "@/lib/constants";
 import { formatTime } from "@/lib/utils";
 
+export const instant = true;
+
 async function ProductsList({
   merchantId,
   defaultStatus,
@@ -162,7 +164,7 @@ async function MerchantContent({
               </AccordionTrigger>
               <AccordionContent>
                 <div className="space-y-3 pb-4">
-                  {DAYS.map((day) => {
+                  {DAYS.map(day => {
                     const dayData = timetable[day.key];
                     const isToday = day.key === today;
                     const isClosed = !dayData || dayData.closed;
@@ -309,7 +311,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${merchant.name} - Starva.shop`,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
     alternates: {
       canonical: merchantUrl,

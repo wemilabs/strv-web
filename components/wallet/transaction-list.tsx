@@ -65,7 +65,7 @@ export function TransactionList({ transactions }: { transactions: Payment[] }) {
   const filteredTransactions =
     filter === "all"
       ? transactions
-      : transactions.filter((tx) => tx.status === filter);
+      : transactions.filter(tx => tx.status === filter);
 
   return (
     <div className="space-y-4">
@@ -76,7 +76,7 @@ export function TransactionList({ transactions }: { transactions: Payment[] }) {
         </p>
         <Select
           value={filter}
-          onValueChange={(value) => setFilter(value as StatusFilter)}
+          onValueChange={value => setFilter(value as StatusFilter)}
         >
           <SelectTrigger className="w-[140px]">
             <Filter className="size-4 mr-2" />
@@ -106,7 +106,7 @@ export function TransactionList({ transactions }: { transactions: Payment[] }) {
             </EmptyHeader>
           </Empty>
         ) : (
-          filteredTransactions.map((tx) => {
+          filteredTransactions.map(tx => {
             const isCashin = tx.kind === "CASHIN";
             const status = statusConfig[tx.status];
             const StatusIcon = status.icon;

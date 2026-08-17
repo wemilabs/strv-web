@@ -44,7 +44,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
         lte(session.createdAt, now),
       ),
     )
-    .then((result) => result[0]?.count || 0);
+    .then(result => result[0]?.count || 0);
 
   const previousVisitors = await db
     .select({ count: count() })
@@ -55,7 +55,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
         lte(session.createdAt, previousPeriodEnd),
       ),
     )
-    .then((result) => result[0]?.count || 0);
+    .then(result => result[0]?.count || 0);
 
   const visitorsChange =
     previousVisitors > 0
@@ -73,7 +73,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
         lte(session.createdAt, now),
       ),
     )
-    .then((result) => result[0]?.count || 0);
+    .then(result => result[0]?.count || 0);
 
   const previousPageViews = await db
     .select({ count: count() })
@@ -84,7 +84,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
         lte(session.createdAt, previousPeriodEnd),
       ),
     )
-    .then((result) => result[0]?.count || 0);
+    .then(result => result[0]?.count || 0);
 
   const pageViewsChange =
     previousPageViews > 0
@@ -108,7 +108,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
       ),
     );
 
-  const currentBounces = currentSessions.filter((s) => {
+  const currentBounces = currentSessions.filter(s => {
     const duration =
       new Date(s.expiresAt).getTime() - new Date(s.createdAt).getTime();
     return duration < BOUNCE_THRESHOLD_MS;
@@ -132,7 +132,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
       ),
     );
 
-  const previousBounces = previousSessions.filter((s) => {
+  const previousBounces = previousSessions.filter(s => {
     const duration =
       new Date(s.expiresAt).getTime() - new Date(s.createdAt).getTime();
     return duration < BOUNCE_THRESHOLD_MS;
@@ -164,7 +164,7 @@ export async function getUserMetrics(): Promise<UserMetricsData> {
       .where(
         and(gte(session.createdAt, hourStart), lte(session.createdAt, hourEnd)),
       )
-      .then((result) => result[0]?.count || 0);
+      .then(result => result[0]?.count || 0);
 
     hourlyActivity.push({
       hour: hourStart

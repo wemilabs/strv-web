@@ -198,7 +198,7 @@ export function NavUser({
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction
                     disabled={isSigningOutPending}
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault();
                       handleSignOut();
                     }}

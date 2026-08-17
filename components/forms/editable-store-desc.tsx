@@ -14,7 +14,7 @@ interface EditableStoreDescriptionProps {
   updateAction: (
     storeId: string,
     storeSlug: string,
-    description: string
+    description: string,
   ) => Promise<void>;
 }
 
@@ -79,7 +79,7 @@ export function EditableStoreDescription({
         <Textarea
           ref={textareaRef}
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value)}
           onKeyDown={handleKeyDown}
           disabled={isPending}
           placeholder="Add a description for your store..."

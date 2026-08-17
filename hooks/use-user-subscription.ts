@@ -12,7 +12,7 @@ export function useUserSubscription() {
   const { data: session } = useSession();
   const user = session?.user;
   const [subscription, setSubscription] = useState<SubscriptionWithPlan | null>(
-    null
+    null,
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,7 +21,7 @@ export function useUserSubscription() {
 
     setIsLoading(true);
     getUserSubscription(user.id)
-      .then((sub) => {
+      .then(sub => {
         setSubscription(sub);
       })
       .finally(() => {
@@ -36,7 +36,7 @@ export function useUserSubscription() {
     }
 
     getUserSubscription(user.id)
-      .then((sub) => {
+      .then(sub => {
         setSubscription(sub);
       })
       .finally(() => {
@@ -53,7 +53,7 @@ export function useUserSubscription() {
     subscription?.trialEndsAt && isTrial
       ? Math.ceil(
           (new Date(subscription.trialEndsAt).getTime() - Date.now()) /
-            (1000 * 60 * 60 * 24)
+            (1000 * 60 * 60 * 24),
         )
       : null;
 

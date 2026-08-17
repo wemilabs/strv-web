@@ -366,8 +366,8 @@ export async function getFollowingFeedProducts() {
       .from(userFollowUser)
       .where(eq(userFollowUser.followerId, userId));
 
-    const followedOrgIds = followedOrgs.map((f) => f.organizationId);
-    const followedUserIds = followedUsers.map((f) => f.followingId);
+    const followedOrgIds = followedOrgs.map(f => f.organizationId);
+    const followedUserIds = followedUsers.map(f => f.followingId);
 
     if (followedOrgIds.length === 0 && followedUserIds.length === 0) {
       return {
@@ -384,7 +384,7 @@ export async function getFollowingFeedProducts() {
         .select({ productId: productLike.productId })
         .from(productLike)
         .where(inArray(productLike.userId, followedUserIds));
-      likedProductIds = likedByFollowed.map((l) => l.productId);
+      likedProductIds = likedByFollowed.map(l => l.productId);
     }
 
     const allProductIds = new Set<string>();
@@ -415,9 +415,7 @@ export async function getFollowingFeedProducts() {
     }
 
     // Get products liked by followed users (excluding those already from orgs)
-    const uniqueLikedIds = likedProductIds.filter(
-      (id) => !allProductIds.has(id),
-    );
+    const uniqueLikedIds = likedProductIds.filter(id => !allProductIds.has(id));
 
     const productsLikedByFollowed =
       uniqueLikedIds.length > 0
@@ -453,14 +451,12 @@ export async function getFollowingFeedProducts() {
       .select({ productId: productLike.productId })
       .from(productLike)
       .where(eq(productLike.userId, userId));
-    const userLikedIds = new Set(
-      userLikedProducts.map((like) => like.productId),
-    );
+    const userLikedIds = new Set(userLikedProducts.map(like => like.productId));
 
     // Format products with metadata
-    const productsWithMeta = allProducts.map((p) => ({
+    const productsWithMeta = allProducts.map(p => ({
       ...p,
-      tags: p.productTags.map((pt) => pt.tag),
+      tags: p.productTags.map(pt => pt.tag),
       isLiked: userLikedIds.has(p.id),
       source: followedOrgIds.includes(p.organizationId)
         ? "followed_merchant"

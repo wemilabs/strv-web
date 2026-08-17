@@ -53,8 +53,7 @@ export async function Hero() {
             as="p"
             className="mx-auto mt-2 max-w-2xl text-sm sm:text-base text-pretty text-primary-foreground font-mono tracking-tighter"
           >
-            Whether discovering local gems or expanding your store reach,
-            Starva.shop is The Way forward.
+            Discover local gems. Expand your store reach.
           </TextEffect>
 
           <AnimatedGroup

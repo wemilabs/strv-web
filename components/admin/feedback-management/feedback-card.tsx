@@ -53,7 +53,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
   const [isPending, startTransition] = useTransition();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<FeedbackStatus | null>(
-    null
+    null,
   );
   const [note, setNote] = useState("");
 
@@ -70,7 +70,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
       const result = await updateFeedbackStatus(
         feedback.id,
         pendingStatus,
-        note.trim() || undefined
+        note.trim() || undefined,
       );
 
       if (result.success) {
@@ -123,7 +123,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              {feedbackStatusOptions.map((option) => (
+              {feedbackStatusOptions.map(option => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>
@@ -166,7 +166,7 @@ export function FeedbackCard({ feedback }: FeedbackCardProps) {
               id="status-note"
               placeholder="e.g., Fixed in version 2.1, Duplicate of #123, etc."
               value={note}
-              onChange={(e) => setNote(e.target.value)}
+              onChange={e => setNote(e.target.value)}
               rows={3}
               disabled={isPending}
             />

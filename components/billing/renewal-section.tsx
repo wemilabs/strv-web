@@ -41,7 +41,7 @@ export function RenewalSection({ subscription }: RenewalSectionProps) {
         className={cn(
           isExpired && "border-destructive",
           isUrgent && !isExpired && "border-orange-500",
-          isExpiringSoon && !isUrgent && "border-yellow-500"
+          isExpiringSoon && !isUrgent && "border-yellow-500",
         )}
       >
         <CardHeader>
@@ -74,7 +74,7 @@ export function RenewalSection({ subscription }: RenewalSectionProps) {
                   subscription.status === "trial" &&
                     "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200",
                   subscription.status === "expired" &&
-                    "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                    "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200",
                 )}
               >
                 {subscription.status === "active" && "Active"}
@@ -106,7 +106,7 @@ export function RenewalSection({ subscription }: RenewalSectionProps) {
                     daysLeft <= 3 && "text-orange-600 dark:text-orange-400",
                     daysLeft > 3 &&
                       daysLeft <= 7 &&
-                      "text-yellow-600 dark:text-yellow-400"
+                      "text-yellow-600 dark:text-yellow-400",
                   )}
                 >
                   {daysLeft} day{daysLeft !== 1 ? "s" : ""}

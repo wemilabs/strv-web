@@ -33,7 +33,7 @@ type CartActions = {
       id: string;
       currentStock: number;
       inventoryEnabled: boolean;
-    }>
+    }>,
   ) => void;
 };
 
@@ -44,9 +44,9 @@ export const useCartStore = create<CartStore>()(
     (set, get) => ({
       items: [],
 
-      addItem: (item) => {
+      addItem: item => {
         const existingItem = get().items.find(
-          (i) => i.productId === item.productId
+          i => i.productId === item.productId,
         );
 
         // Check stock availability if inventory is enabled
@@ -56,14 +56,14 @@ export const useCartStore = create<CartStore>()(
 
           if (requestedQty > item.currentStock) {
             throw new Error(
-              `Only ${item.currentStock} units available in stock`
+              `Only ${item.currentStock} units available in stock`,
             );
           }
         }
 
         if (existingItem) {
           set({
-            items: get().items.map((i) =>
+            items: get().items.map(i =>
               i.productId === item.productId
                 ? {
                     ...i,
@@ -72,7 +72,7 @@ export const useCartStore = create<CartStore>()(
                     inventoryEnabled:
                       item.inventoryEnabled ?? i.inventoryEnabled,
                   }
-                : i
+                : i,
             ),
           });
         } else {
@@ -82,9 +82,9 @@ export const useCartStore = create<CartStore>()(
         }
       },
 
-      removeItem: (productId) => {
+      removeItem: productId => {
         set({
-          items: get().items.filter((i) => i.productId !== productId),
+          items: get().items.filter(i => i.productId !== productId),
         });
       },
 
@@ -95,26 +95,26 @@ export const useCartStore = create<CartStore>()(
         }
 
         // Check stock availability if inventory is enabled
-        const item = get().items.find((i) => i.productId === productId);
+        const item = get().items.find(i => i.productId === productId);
         if (item?.inventoryEnabled && item.currentStock !== undefined) {
           if (quantity > item.currentStock) {
             throw new Error(
-              `Only ${item.currentStock} units available in stock`
+              `Only ${item.currentStock} units available in stock`,
             );
           }
         }
 
         set({
-          items: get().items.map((i) =>
-            i.productId === productId ? { ...i, quantity } : i
+          items: get().items.map(i =>
+            i.productId === productId ? { ...i, quantity } : i,
           ),
         });
       },
 
       updateNotes: (productId, notes) => {
         set({
-          items: get().items.map((i) =>
-            i.productId === productId ? { ...i, notes } : i
+          items: get().items.map(i =>
+            i.productId === productId ? { ...i, notes } : i,
           ),
         });
       },
@@ -149,10 +149,10 @@ export const useCartStore = create<CartStore>()(
         return get().items.reduce((count, item) => count + item.quantity, 0);
       },
 
-      refreshStock: (stocks) => {
+      refreshStock: stocks => {
         set({
-          items: get().items.map((item) => {
-            const stockInfo = stocks.find((s) => s.id === item.productId);
+          items: get().items.map(item => {
+            const stockInfo = stocks.find(s => s.id === item.productId);
             if (stockInfo) {
               // If quantity exceeds new stock, adjust it down
               const newQuantity = stockInfo.inventoryEnabled
@@ -174,7 +174,7 @@ export const useCartStore = create<CartStore>()(
     {
       name: "cart-storage",
       storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ items: state.items }),
-    }
-  )
+      partialize: state => ({ items: state.items }),
+    },
+  ),
 );

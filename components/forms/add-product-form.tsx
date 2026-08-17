@@ -62,7 +62,7 @@ const schema = z
       .string()
       .min(1, "Price is required")
       .refine(
-        (v) => !Number.isNaN(Number(v)) && Number(v) >= 0,
+        v => !Number.isNaN(Number(v)) && Number(v) >= 0,
         "Enter a valid price",
       ),
     imageUrls: z.array(z.url("Provide valid URLs")).optional(),
@@ -78,7 +78,7 @@ const schema = z
     lowStockThreshold: z.number().min(0),
   })
   .refine(
-    (data) => {
+    data => {
       // If real estate and not landlord, visit fees are required
       if (data.category === "real-estate" && !data.isLandlord) {
         return data.visitFees && Number(data.visitFees) > 0;
@@ -140,10 +140,10 @@ export function AddProductForm({
 
   useEffect(() => {
     if (dialogOpen) {
-      getAllTags().then((result) => {
+      getAllTags().then(result => {
         if (result.ok) setAvailableTags(result.tags);
       });
-      getAllUnitFormats().then((result) => {
+      getAllUnitFormats().then(result => {
         if (result.ok) setAvailableUnitFormats(result.unitFormats);
       });
     }
@@ -174,7 +174,7 @@ export function AddProductForm({
           specifications: values.specifications ?? "",
           isLandlord: values.isLandlord,
           visitFees: values.visitFees,
-          tagNames: values.tags.map((t) => t.name),
+          tagNames: values.tags.map(t => t.name),
           unitFormatId: values.unitFormat?.id || null,
           unitFormatName: values.unitFormat?.name,
           inventoryEnabled: values.inventoryEnabled,
@@ -328,7 +328,7 @@ export function AddProductForm({
                             </SelectTrigger>
                           </FormControl>
                           <SelectContent className="z-64">
-                            {getCategoryOptions().map((category) => (
+                            {getCategoryOptions().map(category => (
                               <SelectItem
                                 key={category.value}
                                 value={category.value}
@@ -465,13 +465,13 @@ export function AddProductForm({
                                   content={{
                                     allowedContent: () => "Images only",
                                   }}
-                                  onClientUploadComplete={(res) => {
+                                  onClientUploadComplete={res => {
                                     const imageUrls =
                                       res
-                                        ?.filter((file) =>
+                                        ?.filter(file =>
                                           file.type?.startsWith("image/"),
                                         )
-                                        .map((file) => file.ufsUrl) || [];
+                                        .map(file => file.ufsUrl) || [];
                                     const currentUrls = field.value || [];
                                     const newUrls = [
                                       ...currentUrls,
@@ -479,7 +479,7 @@ export function AddProductForm({
                                     ].slice(0, 3);
                                     field.onChange(newUrls);
                                   }}
-                                  onUploadError={(err) => {
+                                  onUploadError={err => {
                                     console.error(err);
                                     toast.error(
                                       err?.message ||
@@ -541,9 +541,9 @@ export function AddProductForm({
                               className="ut-button:bg-primary ut-button:ut-readying:bg-primary/50"
                               headers={{ "x-store-slug": storeSlug }}
                               content={{ allowedContent: () => "Video only" }}
-                              onClientUploadComplete={(res) => {
+                              onClientUploadComplete={res => {
                                 const videoUrl =
-                                  res?.find((file) =>
+                                  res?.find(file =>
                                     file.type?.startsWith("video/"),
                                   )?.ufsUrl || "";
                                 if (videoUrl)
@@ -551,7 +551,7 @@ export function AddProductForm({
                                     shouldValidate: true,
                                   });
                               }}
-                              onUploadError={(err) => {
+                              onUploadError={err => {
                                 console.error(err);
                                 toast.error(
                                   err?.message ||
@@ -638,7 +638,7 @@ export function AddProductForm({
                             min="0"
                             placeholder="5"
                             {...field}
-                            onChange={(e) =>
+                            onChange={e =>
                               field.onChange(Number(e.target.value))
                             }
                           />

@@ -13,7 +13,7 @@ export const getUserFollowedOrganizationIds = cache(
       .from(userFollowOrganization)
       .where(eq(userFollowOrganization.userId, userId));
 
-    return follows.map((f) => f.organizationId);
+    return follows.map(f => f.organizationId);
   },
 );
 
@@ -24,7 +24,7 @@ export const getUserFollowedUserIds = cache(
       .from(userFollowUser)
       .where(eq(userFollowUser.followerId, userId));
 
-    return follows.map((f) => f.followingId);
+    return follows.map(f => f.followingId);
   },
 );
 
@@ -35,7 +35,7 @@ export const getUserFollowerIds = cache(
       .from(userFollowUser)
       .where(eq(userFollowUser.followingId, userId));
 
-    return follows.map((f) => f.followerId);
+    return follows.map(f => f.followerId);
   },
 );
 
@@ -103,7 +103,7 @@ export const getUserFollowedOrganizations = cache(async (userId: string) => {
     orderBy: desc(userFollowOrganization.createdAt),
   });
 
-  return followedOrgs.map((follow) => follow.organization);
+  return followedOrgs.map(follow => follow.organization);
 });
 
 export async function getUserFollowStatusForCurrentUser(targetUserId: string) {

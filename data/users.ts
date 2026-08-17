@@ -51,7 +51,7 @@ export async function getAllUsers(options: UserOptions = {}) {
         .innerJoin(organization, eq(member.organizationId, organization.id))
         .where(ilike(organization.name, `%${search}%`));
 
-      const userIds = orgUsers.map((u) => u.userId);
+      const userIds = orgUsers.map(u => u.userId);
 
       if (userIds.length > 0)
         whereCondition = or(whereCondition, inArray(user.id, userIds));
@@ -75,7 +75,7 @@ export async function getAllUsers(options: UserOptions = {}) {
 
     // Get organizations for each user separately
     const usersWithOrgs = await Promise.all(
-      users.map(async (userRecord) => {
+      users.map(async userRecord => {
         const userMembers = await db.query.member.findMany({
           where: eq(member.userId, userRecord.id),
           with: {
@@ -190,7 +190,7 @@ export async function getMyLikedProductsForMobile(userId: string) {
     .where(eq(productLike.userId, userId))
     .orderBy(desc(productLike.createdAt));
 
-  const likedProductIds = likedByUser.map((l) => l.productId);
+  const likedProductIds = likedByUser.map(l => l.productId);
   if (likedProductIds.length === 0) return [];
 
   const products = await db.query.product.findMany({
@@ -211,12 +211,12 @@ export async function getMyLikedProductsForMobile(userId: string) {
     },
   });
 
-  const productById = new Map(products.map((p) => [p.id, p] as const));
+  const productById = new Map(products.map(p => [p.id, p] as const));
 
   return likedProductIds
-    .map((id) => productById.get(id))
+    .map(id => productById.get(id))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))
-    .map((p) => ({
+    .map(p => ({
       ...p,
       isLiked: true,
     }));
@@ -285,16 +285,13 @@ export const getDiscoverableUsers = cache(async () => {
 
     excludeUserIds = [
       session.user.id,
-      ...followedUsers.map((f) => f.followingId),
+      ...followedUsers.map(f => f.followingId),
     ];
   }
 
   const whereCondition =
     excludeUserIds.length > 0
-      ? and(
-          ne(user.banned, true),
-          ...excludeUserIds.map((id) => ne(user.id, id)),
-        )
+      ? and(ne(user.banned, true), ...excludeUserIds.map(id => ne(user.id, id)))
       : ne(user.banned, true);
 
   const users = await db.query.user.findMany({
@@ -303,7 +300,7 @@ export const getDiscoverableUsers = cache(async () => {
   });
 
   const usersWithStats = await Promise.all(
-    users.map(async (userRecord) => {
+    users.map(async userRecord => {
       const likesCount = await db
         .select({ count: count() })
         .from(productLike)
@@ -333,7 +330,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
     .orderBy(desc(productLike.createdAt))
     .limit(12);
 
-  const likedProductIds = likedByProfile.map((l) => l.productId);
+  const likedProductIds = likedByProfile.map(l => l.productId);
 
   const likedProducts =
     likedProductIds.length > 0
@@ -371,7 +368,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
         )
     : [];
 
-  const viewerLikedSet = new Set(viewerLikedIds.map((l) => l.productId));
+  const viewerLikedSet = new Set(viewerLikedIds.map(l => l.productId));
 
   const followerIds = await db
     .select({ followerId: userFollowUser.followerId })
@@ -390,7 +387,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
       ? await db.query.user.findMany({
           where: inArray(
             user.id,
-            followerIds.map((f) => f.followerId),
+            followerIds.map(f => f.followerId),
           ),
           columns: {
             id: true,
@@ -407,7 +404,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
       ? await db.query.user.findMany({
           where: inArray(
             user.id,
-            followingIds.map((f) => f.followingId),
+            followingIds.map(f => f.followingId),
           ),
           columns: {
             id: true,
@@ -421,7 +418,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
 
   // Get follow status for followers list
   const followersWithStatus = await Promise.all(
-    followers.map(async (follower) => ({
+    followers.map(async follower => ({
       ...follower,
       isFollowing: viewerUserId
         ? await isFollowingUser(viewerUserId, follower.id)
@@ -431,7 +428,7 @@ export const getUserProfileData = cache(async (targetUserId: string) => {
 
   // Get follow status for following list
   const followingWithStatus = await Promise.all(
-    following.map(async (followedUser) => ({
+    following.map(async followedUser => ({
       ...followedUser,
       isFollowing: viewerUserId
         ? await isFollowingUser(viewerUserId, followedUser.id)

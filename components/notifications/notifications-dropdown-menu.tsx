@@ -103,7 +103,7 @@ export function NotificationsDropdownMenu() {
 
         if (!ignore) {
           setNotifications(
-            notificationsData.notifications?.map((n) => ({
+            notificationsData.notifications?.map(n => ({
               ...n,
               storeName: null,
             })) ?? [],
@@ -124,10 +124,10 @@ export function NotificationsDropdownMenu() {
 
   // Mark notification as read when clicked
   const handleNotificationClick = async (notificationId: string) => {
-    setNotifications((prev) =>
-      prev.map((n) => (n.id === notificationId ? { ...n, read: true } : n)),
+    setNotifications(prev =>
+      prev.map(n => (n.id === notificationId ? { ...n, read: true } : n)),
     );
-    setUnreadCount((prev) => Math.max(0, prev - 1));
+    setUnreadCount(prev => Math.max(0, prev - 1));
 
     try {
       await markOrderNotificationAsRead(notificationId);
@@ -161,7 +161,7 @@ export function NotificationsDropdownMenu() {
       "orders.delivered",
       "orders.cancelled",
     ],
-    onData: (payload) => {
+    onData: payload => {
       if (
         payload.event === "orders.new" &&
         payload.data.organizationId === activeStore?.id
@@ -181,8 +181,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) => [newNotification, ...prev].slice(0, 50));
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [newNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("New order received!", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.customerName}`,
@@ -214,8 +214,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) => [paidNotification, ...prev].slice(0, 50));
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [paidNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("Order Paid!", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.customerName} has been paid`,
@@ -245,10 +245,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [deliveredNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [deliveredNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("Order Delivered!", {
           description: `Order #${payload.data.orderNumber} was marked as delivered by ${payload.data.customerName}`,
@@ -282,10 +280,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [cancelledNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [cancelledNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.error("Order Cancelled", {
           description: `Order #${payload.data.orderNumber} was cancelled by ${payload.data.customerName}`,
@@ -310,7 +306,7 @@ export function NotificationsDropdownMenu() {
       "orders.delivered",
       "orders.cancelled",
     ],
-    onData: (payload) => {
+    onData: payload => {
       if (payload.event === "orders.confirmed") {
         const confirmedNotification: OrderNotification = {
           id: crypto.randomUUID(),
@@ -327,10 +323,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [confirmedNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [confirmedNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("Order Confirmed!", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.storeName} has been confirmed`,
@@ -359,10 +353,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [preparingNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [preparingNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.info("Order Being Prepared", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.storeName} is being prepared`,
@@ -391,8 +383,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) => [readyNotification, ...prev].slice(0, 50));
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [readyNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("Order Ready!", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.storeName} is ready for pickup`,
@@ -421,10 +413,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [deliveredNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [deliveredNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("Order Delivered!", {
           description: `Order #${payload.data.orderNumber} from ${payload.data.storeName} has been delivered`,
@@ -457,10 +447,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [cancelledNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [cancelledNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.error("Order Cancelled", {
           description: `Order #${payload.data.orderNumber} was cancelled by ${payload.data.storeName}`,
@@ -479,7 +467,7 @@ export function NotificationsDropdownMenu() {
   useRealtime({
     channels: userId ? [`user:${userId}`] : [],
     events: ["followers.new"],
-    onData: (payload) => {
+    onData: payload => {
       if (payload.event === "followers.new") {
         const followerNotification: FollowerNotification = {
           id: payload.data.notificationId,
@@ -494,10 +482,8 @@ export function NotificationsDropdownMenu() {
           read: false,
         };
 
-        setNotifications((prev) =>
-          [followerNotification, ...prev].slice(0, 50),
-        );
-        setUnreadCount((prev) => prev + 1);
+        setNotifications(prev => [followerNotification, ...prev].slice(0, 50));
+        setUnreadCount(prev => prev + 1);
 
         toast.success("New Follower!", {
           description:
@@ -622,7 +608,7 @@ export function NotificationsDropdownMenu() {
           </div>
         ) : (
           <div className="max-h-96 overflow-y-auto">
-            {notifications.map((notification) => (
+            {notifications.map(notification => (
               <DropdownMenuItem
                 key={notification.id}
                 className="p-3 cursor-pointer focus:bg-accent"

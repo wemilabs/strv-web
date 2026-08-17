@@ -21,7 +21,7 @@ type OrganizationInvitationEmailProps = {
 };
 
 export const OrganizationInvitationEmail = (
-  props: OrganizationInvitationEmailProps
+  props: OrganizationInvitationEmailProps,
 ) => {
   return (
     <Html dir="ltr" lang="en">

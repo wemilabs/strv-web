@@ -35,12 +35,12 @@ export async function InventoryContent({
 
   const products = result.products;
   const lowStockProducts = products.filter(
-    (p) => p.currentStock > 0 && p.currentStock <= p.lowStockThreshold
+    p => p.currentStock > 0 && p.currentStock <= p.lowStockThreshold,
   );
-  const outOfStockProducts = products.filter((p) => p.currentStock === 0);
+  const outOfStockProducts = products.filter(p => p.currentStock === 0);
   const totalValue = products.reduce(
     (sum, p) => sum + Number(p.price) * p.currentStock,
-    0
+    0,
   );
 
   return (

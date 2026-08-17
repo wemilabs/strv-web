@@ -49,15 +49,15 @@ export async function GET(request: NextRequest) {
     const wantsProducts = tab === "all" || tab === "products";
 
     const merchants = wantsMerchants
-      ? ((await getAllStoresWithFollowData())?.filter((m) =>
+      ? ((await getAllStoresWithFollowData())?.filter(m =>
           q ? includesCI(m.name, q) : true,
         ) ?? [])
       : [];
 
     const products = wantsProducts
       ? (await getFilteredProducts({ search: q, sortBy }))
-          .filter((p) => (category ? p.category === category : true))
-          .filter((p) =>
+          .filter(p => (category ? p.category === category : true))
+          .filter(p =>
             organizationId ? p.organizationId === organizationId : true,
           )
       : [];

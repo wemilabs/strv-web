@@ -35,7 +35,7 @@ export function encrypt(plaintext: string): string {
 }
 
 export function decrypt(ciphertext: string): string {
-  if (!ciphertext || !ciphertext.includes(":")) return ciphertext;
+  if (!ciphertext?.includes(":")) return ciphertext;
 
   try {
     const [ivHex, authTagHex, encrypted] = ciphertext.split(":");

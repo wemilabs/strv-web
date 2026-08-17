@@ -32,7 +32,7 @@ export function AddToCartButton({
   className,
 }: AddToCartButtonProps) {
   const [isAdding, setIsAdding] = useState(false);
-  const addItem = useCartStore((state) => state.addItem);
+  const addItem = useCartStore(state => state.addItem);
 
   const handleAddToCart = () => {
     setIsAdding(true);

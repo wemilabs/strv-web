@@ -106,7 +106,7 @@ export function UserTable({
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user) => (
+          {users.map(user => (
             <TableRow key={user.id}>
               <TableCell>
                 <div className="flex items-center gap-3">
@@ -130,7 +130,7 @@ export function UserTable({
                 <div className="text-sm">
                   {user.members && user.members.length > 0 ? (
                     <div className="space-y-1">
-                      {user.members.slice(0, 2).map((member) => (
+                      {user.members.slice(0, 2).map(member => (
                         <div key={member.organization.id} className="text-xs">
                           {member.organization.name}
                         </div>
@@ -210,7 +210,7 @@ export function UserTable({
                     <DropdownMenuSeparator />
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
-                        <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+                        <DropdownMenuItem onSelect={e => e.preventDefault()}>
                           <Trash2 className="mr-2 size-4 text-red-600" />
                           <span className="text-red-600">Delete</span>
                         </DropdownMenuItem>

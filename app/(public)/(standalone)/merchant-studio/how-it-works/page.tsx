@@ -91,7 +91,7 @@ export default async function MerchantStudioHowItWorksPage() {
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {HIGHLIGHTS.map((item) => (
+            {HIGHLIGHTS.map(item => (
               <div
                 key={item.title}
                 className="rounded-lg border bg-background p-4"

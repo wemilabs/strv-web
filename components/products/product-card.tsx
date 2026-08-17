@@ -113,7 +113,7 @@ export function ProductCard({
                 {/** biome-ignore lint/a11y/useKeyWithClickEvents: actually needed */}
                 <div
                   className="flex items-center gap-1.5"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={e => e.stopPropagation()}
                 >
                   <EditProductForm
                     product={{

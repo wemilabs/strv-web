@@ -29,10 +29,10 @@ export function usePushNotifications() {
 
     // Check existing subscription
     navigator.serviceWorker.ready
-      .then((registration) => {
+      .then(registration => {
         return registration.pushManager.getSubscription();
       })
-      .then((sub) => {
+      .then(sub => {
         setIsSubscribed(!!sub);
         setIsLoading(false);
       })

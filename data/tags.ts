@@ -80,7 +80,7 @@ export const getAllTagsWithProducts = cache(async () => {
         tag.slug,
         tag.description,
         tag.createdAt,
-        tag.updatedAt
+        tag.updatedAt,
       )
       .orderBy(tag.name);
 
@@ -111,7 +111,7 @@ export const getTagsByCategory = cache(
         .innerJoin(productTag, eq(productTag.tagId, tag.id))
         .innerJoin(product, eq(product.id, productTag.productId))
         .where(
-          sql`${product.category} = ${categorySlug} AND ${product.status} = 'in_stock'`
+          sql`${product.category} = ${categorySlug} AND ${product.status} = 'in_stock'`,
         )
         .groupBy(
           tag.id,
@@ -119,7 +119,7 @@ export const getTagsByCategory = cache(
           tag.slug,
           tag.description,
           tag.createdAt,
-          tag.updatedAt
+          tag.updatedAt,
         )
         .orderBy(tag.name);
 
@@ -128,5 +128,5 @@ export const getTagsByCategory = cache(
       console.error("Failed to fetch tags for category:", categorySlug, error);
       return [];
     }
-  }
+  },
 );

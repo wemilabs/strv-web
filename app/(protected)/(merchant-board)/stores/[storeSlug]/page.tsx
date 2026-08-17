@@ -210,7 +210,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${store.name} - Starva.shop`,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
     alternates: {
       canonical: storeUrl,

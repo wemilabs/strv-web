@@ -95,9 +95,9 @@ export async function BillingContent() {
     canCreate: true,
     maxOrders: isAdmin
       ? "Unlimited"
-      : ((plan?.orderLimit === null
-          ? "Unlimited"
-          : (plan?.orderLimit ?? 50)) as number | string),
+      : ((plan?.orderLimit === null ? "Unlimited" : (plan?.orderLimit ?? 50)) as
+          | number
+          | string),
     currentOrders: 0,
     planName: isAdmin ? "Admin" : (plan?.name ?? null),
   };
@@ -255,7 +255,7 @@ export async function BillingContent() {
             <div className="mt-6">
               <p className="text-sm font-medium mb-3">Plan Features</p>
               <div className="grid gap-2 sm:grid-cols-2">
-                {plan.features.map((feature) => (
+                {plan.features.map(feature => (
                   <div
                     key={`feature-${feature}-${feature.replace(/\s+/g, "-")}`}
                     className="flex items-center gap-2 text-sm"
@@ -447,7 +447,7 @@ export async function BillingContent() {
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
-              {payments.map((payment) => (
+              {payments.map(payment => (
                 <div
                   key={payment.id}
                   className="flex items-center justify-between py-3 border-b last:border-0"

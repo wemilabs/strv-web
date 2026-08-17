@@ -13,11 +13,10 @@ interface OrderStatsProps {
 export function OrderStats({ stats }: OrderStatsProps) {
   const totalOrders = stats.reduce((sum, stat) => sum + stat.count, 0);
   const totalRevenue = stats
-    .filter((stat) => stat.status !== "cancelled" && stat.status !== "pending")
+    .filter(stat => stat.status !== "cancelled" && stat.status !== "pending")
     .reduce((sum, stat) => sum + parseFloat(stat.totalRevenue || "0"), 0);
-  const pendingOrders = stats.find((s) => s.status === "pending")?.count || 0;
-  const deliveredOrders =
-    stats.find((s) => s.status === "delivered")?.count || 0;
+  const pendingOrders = stats.find(s => s.status === "pending")?.count || 0;
+  const deliveredOrders = stats.find(s => s.status === "delivered")?.count || 0;
 
   const cardData = [
     {

@@ -25,8 +25,8 @@ export function SubscriptionBadge() {
     planName === "Enterprise" || planName === "Pro" || planName === "Growth"
       ? "default"
       : planName === "Starter"
-      ? "secondary"
-      : "outline";
+        ? "secondary"
+        : "outline";
 
   return (
     <Badge variant={variant} className="gap-1">

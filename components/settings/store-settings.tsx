@@ -64,7 +64,7 @@ export function StoreSettings({
               id="current-timezone"
               className="text-sm text-muted-foreground font-mono tracking-tighter"
             >
-              {TIMEZONES.find((tz) => tz.value === initialTimezone)?.label}
+              {TIMEZONES.find(tz => tz.value === initialTimezone)?.label}
             </p>
           </div>
 
@@ -73,7 +73,7 @@ export function StoreSettings({
               <SelectValue placeholder="Select timezone" />
             </SelectTrigger>
             <SelectContent>
-              {TIMEZONES.map((tz) => (
+              {TIMEZONES.map(tz => (
                 <SelectItem key={tz.value} value={tz.value}>
                   {tz.label}
                 </SelectItem>

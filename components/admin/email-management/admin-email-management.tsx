@@ -232,7 +232,7 @@ export function AdminEmailManagement() {
 
   const [{ search, status }, setFilters] = useQueryStates(
     {
-      search: { defaultValue: "", parse: (v) => v || "" },
+      search: { defaultValue: "", parse: v => v || "" },
       status: parseAsStringLiteral(statusOptions).withDefault("all"),
     },
     {
@@ -394,7 +394,7 @@ export function AdminEmailManagement() {
                 <Input
                   placeholder="Search emails..."
                   value={search}
-                  onChange={(e) => setFilters({ search: e.target.value })}
+                  onChange={e => setFilters({ search: e.target.value })}
                   className="pl-8 placeholder:text-sm text-sm"
                 />
                 <Activity mode={search ? "visible" : "hidden"}>
@@ -409,7 +409,7 @@ export function AdminEmailManagement() {
               </div>
               <Tabs
                 value={status}
-                onValueChange={(value) =>
+                onValueChange={value =>
                   setFilters({
                     status: value as
                       | "all"
@@ -451,7 +451,7 @@ export function AdminEmailManagement() {
                     </EmptyHeader>
                   </Empty>
                 ) : (
-                  emails.map((email) => (
+                  emails.map(email => (
                     <button
                       type="button"
                       key={email.id}
@@ -526,7 +526,7 @@ export function AdminEmailManagement() {
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
                       <AlertDialogAction
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault();
                           handleDeleteEmail();
                         }}
@@ -567,7 +567,7 @@ export function AdminEmailManagement() {
                     <div>
                       <h4 className="text-sm font-medium mb-2">Attachments:</h4>
                       <div className="grid grid-cols-2 gap-3">
-                        {selectedEmail.attachments.map((attachment) => {
+                        {selectedEmail.attachments.map(attachment => {
                           const isImage =
                             attachment.contentType?.startsWith("image/");
                           const isPdf =

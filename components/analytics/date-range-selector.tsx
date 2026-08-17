@@ -20,7 +20,7 @@ export function DateRangeSelector({ value, onChange }: DateRangeSelectorProps) {
   return (
     <div className="flex items-center gap-2 p-1 bg-muted rounded-lg">
       <Calendar className="size-4 text-muted-foreground ml-2" />
-      {dateRanges.map((range) => (
+      {dateRanges.map(range => (
         <Button
           key={range.value}
           variant={value === range.value ? "default" : "ghost"}

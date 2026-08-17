@@ -11,7 +11,7 @@ export function AnalyticsWrapper({ children }: AnalyticsWrapperProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentRange =
-    (parseInt(searchParams.get("days") || "28") as DateRange) || 28;
+    (parseInt(searchParams.get("days") || "28", 10) as DateRange) || 28;
 
   const handleRangeChange = (range: DateRange) => {
     const params = new URLSearchParams(searchParams);

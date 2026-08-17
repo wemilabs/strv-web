@@ -108,7 +108,7 @@ async function OrderContent({
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {order.orderItems.map((item) => (
+                {order.orderItems.map(item => (
                   <div
                     key={item.id}
                     className="flex items-center gap-4 p-3 rounded-lg border"
@@ -396,7 +396,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: images.map((img) => img.url),
+      images: images.map(img => img.url),
     },
     alternates: {
       canonical: orderUrl,
@@ -432,7 +432,7 @@ export default async function OrderPage(
                 </div>
 
                 <div className="space-y-4">
-                  {[1, 2].map((i) => (
+                  {[1, 2].map(i => (
                     <div
                       key={i}
                       className="flex items-center gap-4 p-3 rounded-lg border"

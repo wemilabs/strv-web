@@ -163,17 +163,20 @@ export function OrderTabs({
 }
 
 function calculateOrderStats(orders: OrderWithOrganization[]) {
-  const statusCounts = orders.reduce((acc, order) => {
-    acc[order.status] = (acc[order.status] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const statusCounts = orders.reduce(
+    (acc, order) => {
+      acc[order.status] = (acc[order.status] || 0) + 1;
+      return acc;
+    },
+    {} as Record<string, number>,
+  );
 
-  return ORDER_STATUS_VALUES.map((status) => ({
+  return ORDER_STATUS_VALUES.map(status => ({
     status,
     count: statusCounts[status] || 0,
     totalRevenue:
       orders
-        .filter((o) => o.status === status)
+        .filter(o => o.status === status)
         .reduce((sum, o) => sum + parseFloat(o.totalPrice), 0)
         .toString() || "0",
   }));

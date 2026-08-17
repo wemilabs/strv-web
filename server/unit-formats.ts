@@ -12,7 +12,7 @@ const createUnitFormatSchema = z.object({
 });
 
 export async function createUnitFormat(
-  input: z.infer<typeof createUnitFormatSchema>
+  input: z.infer<typeof createUnitFormatSchema>,
 ) {
   const parsed = createUnitFormatSchema.safeParse(input);
   if (!parsed.success) {

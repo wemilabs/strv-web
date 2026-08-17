@@ -1,5 +1,8 @@
 import { Suspense } from "react";
 import { Hero } from "@/components/hero";
+
+export const instant = true;
+
 import { LatestProducts } from "@/components/products/latest-products";
 import { SkeletonProductCard } from "@/components/products/skeleton-product-card";
 
