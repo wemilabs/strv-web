@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { BillingContent } from "@/components/usage/billing-content";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Billing & Usage - Starva.shop",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://starva.shop/usage/billing",
+    url: `${APP_URL}/usage/billing`,
     title: "Billing & Usage - Starva.shop",
     description:
       "Monitor your subscription plan and track usage limits for organizations, products, and orders.",

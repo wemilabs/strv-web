@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { PRODUCT_STATUS_VALUES } from "@/lib/constants";
+import { APP_URL, PRODUCT_STATUS_VALUES } from "@/lib/constants";
 import { removeUnderscoreAndCapitalizeOnlyTheFirstChar } from "@/lib/utils";
 import { ShareDialog } from "../share-dialog";
 import { Button } from "../ui/button";
@@ -100,9 +100,7 @@ export function ProductCatalogueControls({
             </Dialog>
 
             <ShareDialog
-              url={`${
-                process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-              }/merchants/${storeSlug}`}
+              url={`${APP_URL}/merchants/${storeSlug}`}
               title={`Share ${storeName}`}
               description={`Share your store catalogue with others`}
               variant={{ variant: "ghost", size: "icon" }}

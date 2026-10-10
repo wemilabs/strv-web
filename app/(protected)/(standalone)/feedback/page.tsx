@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 
 import { FeedbackContent } from "@/components/feedback/feedback-content";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export async function generateMetadata(): Promise<Metadata> {
   const title = "Feedback - Starva.shop";
   const description =
     "Share your thoughts and feedback with us. Help us improve Starva.shop by providing your valuable feedback.";
 
-  const feedbackUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/feedback`;
+  const feedbackUrl = `${APP_URL}/feedback`;
 
   return {
     title,

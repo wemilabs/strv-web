@@ -3,11 +3,11 @@ import {
   organizationClient,
 } from "better-auth/client/plugins";
 import { createAuthClient } from "better-auth/react";
+import { APP_URL } from "@/lib/constants";
 import { ac, admin, member, owner } from "./permissions";
 
 const authClient = createAuthClient({
-  baseURL:
-    (process.env.NEXT_PUBLIC_APP_URL as string) ?? "http://localhost:3000",
+  baseURL: APP_URL,
   plugins: [
     lastLoginMethodClient(),
     organizationClient({ ac, roles: { owner, admin, member } }),

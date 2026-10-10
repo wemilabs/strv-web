@@ -16,7 +16,11 @@ import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register"
 import { ThemeColorSync } from "@/components/pwa/theme-color-sync";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import { GENERAL_BRANDING_IMG_URL, THEME_COLORS } from "@/lib/constants";
+import {
+  APP_URL,
+  GENERAL_BRANDING_IMG_URL,
+  THEME_COLORS,
+} from "@/lib/constants";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -33,7 +37,7 @@ export const metadata: Metadata = {
   title: "Starva.shop - The Next Generation Social Marketplace",
   description:
     "Search. Shop. Smile. - Starva.shop is the super fast, secure, reliable and easy to use next-gen social marketplace.",
-  metadataBase: new URL("https://starva.shop/"),
+  metadataBase: new URL(APP_URL),
   keywords: [
     "starva",
     "Starva.shop",
@@ -86,7 +90,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://starva.shop/",
+    url: APP_URL,
     title: "Starva.shop - The Next Generation Social Marketplace",
     description:
       "Search. Shop. Smile. - Starva.shop is the super fast, secure, reliable and easy to use next-gen social marketplace.",

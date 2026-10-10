@@ -11,7 +11,7 @@ import { ShareDialog } from "@/components/share-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { getProductBySlug } from "@/data/products";
-import { FALLBACK_PRODUCT_IMG_URL } from "@/lib/constants";
+import { APP_URL, FALLBACK_PRODUCT_IMG_URL } from "@/lib/constants";
 import {
   formatPriceInRWF,
   getCategoryLabel,
@@ -150,9 +150,7 @@ async function ProductDisplay({ productSlug }: { productSlug: string }) {
             </Button>
 
             <ShareDialog
-              url={`${
-                process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-              }/products/${product.slug}`}
+              url={`${APP_URL}/products/${product.slug}`}
               buttonTitle="Share"
               title={`Share ${product.name}`}
               description={`Share this product with others`}
@@ -214,9 +212,7 @@ export async function generateMetadata({
           },
         ];
 
-  const productUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/products/${resolvedSlug}`;
+  const productUrl = `${APP_URL}/products/${resolvedSlug}`;
 
   return {
     title,
