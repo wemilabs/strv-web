@@ -74,10 +74,7 @@ export function NavMain({
                 {getCategoryOptions().map(category => (
                   <SidebarMenuSubItem key={category.value}>
                     <SidebarMenuSubButton asChild>
-                      <Link
-                        href={`/products/category/${category.value}`}
-                        prefetch
-                      >
+                      <Link href={`/products/category/${category.value}`}>
                         <span>{category.label}</span>
                       </Link>
                     </SidebarMenuSubButton>
