@@ -19,7 +19,12 @@ import { getFollowStatusForCurrentUser } from "@/data/follows";
 import { getProductsPerStoreWithoutAuth } from "@/data/products";
 import { getStoreBySlug } from "@/data/stores";
 import { getOrganizationFollowersCount } from "@/data/trends";
-import { DAYS, GENERAL_BRANDING_IMG_URL, today } from "@/lib/constants";
+import {
+  APP_URL,
+  DAYS,
+  GENERAL_BRANDING_IMG_URL,
+  today,
+} from "@/lib/constants";
 import { formatTime } from "@/lib/utils";
 
 export const instant = true;
@@ -140,9 +145,7 @@ async function MerchantContent({
               className="bg-white/10 hover:bg-white/20 text-white border-white/20"
             />
             <ShareDialog
-              url={`${
-                process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"
-              }/merchants/${resolvedSlug}`}
+              url={`${APP_URL}/merchants/${resolvedSlug}`}
               buttonTitle="Share"
               title={`Share ${merchant.name}`}
               description={`Share this merchant catalogue with others`}
@@ -292,9 +295,7 @@ export async function generateMetadata({
     });
   }
 
-  const merchantUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/merchants/${resolvedSlug}`;
+  const merchantUrl = `${APP_URL}/merchants/${resolvedSlug}`;
 
   return {
     title: `${merchant.name} - Starva.shop`,

@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/empty";
 import { getStoresPerUser } from "@/data/stores";
 import { verifySession } from "@/data/user-session";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 async function StoresList() {
   const sessionData = await verifySession();
@@ -73,9 +73,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Manage your stores with Starva.shop. Update products, track orders, and grow your store with powerful management tools.";
 
-  const storesUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/stores`;
+  const storesUrl = `${APP_URL}/stores`;
 
   return {
     title,

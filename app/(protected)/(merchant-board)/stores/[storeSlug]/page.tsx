@@ -13,7 +13,7 @@ import { SkeletonProductCard } from "@/components/products/skeleton-product-card
 import { Skeleton } from "@/components/ui/skeleton";
 import { getProductsPerStore } from "@/data/products";
 import { getStoreBySlug } from "@/data/stores";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 import {
   updateStoreDescription,
   updateStoreLogo,
@@ -191,9 +191,7 @@ export async function generateMetadata({
     });
   }
 
-  const storeUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/stores/${resolvedSlug}`;
+  const storeUrl = `${APP_URL}/stores/${resolvedSlug}`;
 
   return {
     title: `${store.name} - Starva.shop`,

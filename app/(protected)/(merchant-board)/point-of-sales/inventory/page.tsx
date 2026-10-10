@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { InventoryPageWrapper } from "@/components/inventory/inventory-page-wrapper";
 import { Skeleton } from "@/components/ui/skeleton";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Inventory Management - Starva.shop",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://starva.shop/inventory",
+    url: `${APP_URL}/inventory`,
     title: "Inventory Management - Starva.shop",
     description:
       "Track and manage your product stock levels, monitor inventory changes, and receive low stock alerts in real-time.",

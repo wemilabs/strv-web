@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/empty";
 import { Skeleton } from "@/components/ui/skeleton";
 import { verifySession } from "@/data/user-session";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 import { getOrganizationAnalyticsOverview } from "@/server/orders";
 import { getUserSubscription } from "@/server/subscription";
 
@@ -31,9 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Powerful insights and analytics to help you make data-driven decisions. Track sales, monitor performance, and grow your store with detailed metrics and reports.";
 
-  const analyticsUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/analytics`;
+  const analyticsUrl = `${APP_URL}/analytics`;
 
   return {
     title,

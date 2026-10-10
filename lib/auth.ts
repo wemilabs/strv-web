@@ -21,6 +21,7 @@ import {
   productTag,
   schema,
 } from "@/db/schema";
+import { APP_URL } from "@/lib/constants";
 import {
   ac,
   admin as customAdminRole,
@@ -94,7 +95,7 @@ export const auth = betterAuth({
     organization({
       ac,
       sendInvitationEmail: async data => {
-        const inviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/accept-invitation/${data.id}`;
+        const inviteLink = `${APP_URL}/api/accept-invitation/${data.id}`;
 
         await resend.emails.send({
           from: `${process.env.EMAIL_SENDER_NAME} <${process.env.ORG_INVITATION_EMAIL_SENDER_ADDRESS}>`,

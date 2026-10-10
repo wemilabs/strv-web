@@ -19,7 +19,7 @@ import {
   getWalletBalance,
   getWalletTransactions,
 } from "@/data/wallet";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 function WalletSkeleton() {
   return (
@@ -131,9 +131,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Manage your store's wallet. View balance, request withdrawals, and track all transactions with Starva.shop.";
 
-  const walletUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/point-of-sales/wallet`;
+  const walletUrl = `${APP_URL}/point-of-sales/wallet`;
 
   return {
     title,

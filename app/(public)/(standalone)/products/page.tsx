@@ -7,7 +7,7 @@ import { SkeletonProductCard } from "@/components/products/skeleton-product-card
 import { Skeleton } from "@/components/ui/skeleton";
 import { getInStockProducts } from "@/data/products";
 import { getAllTagsWithProducts } from "@/data/tags";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export const instant = true;
 
@@ -167,7 +167,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${title} - Starva.shop`,
       description,
-      url: `https://starva.shop/products${
+      url: `${APP_URL}/products${
         search ? `?search=${encodeURIComponent(search)}` : ""
       }${
         parsedTags && parsedTags.length > 0
