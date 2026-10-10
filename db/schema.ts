@@ -132,8 +132,6 @@ export const paymentStatus = pgEnum("payment_status", [
 
 export const paymentKind = pgEnum("payment_kind", ["CASHIN", "CASHOUT"]);
 
-export const mobilePlatform = pgEnum("mobile_platform", ["ios", "android"]);
-
 export const notificationType = pgEnum("notification_type", [
   "renewal_reminder_7d",
   "renewal_reminder_3d",
@@ -181,30 +179,6 @@ export const adminAuditLog = pgTable(
     index("admin_audit_log_admin_idx").on(t.adminId),
     index("admin_audit_log_action_idx").on(t.action),
     index("admin_audit_log_created_idx").on(t.createdAt),
-  ],
-);
-
-export const mobilePushToken = pgTable(
-  "mobile_push_token",
-  {
-    id: text("id")
-      .$defaultFn(() => randomUUID())
-      .primaryKey(),
-    userId: text("user_id")
-      .notNull()
-      .references(() => user.id, { onDelete: "cascade" }),
-    expoPushToken: text("expo_push_token").notNull(),
-    platform: mobilePlatform("platform").notNull(),
-    createdAt: timestamp("created_at")
-      .$defaultFn(() => new Date())
-      .notNull(),
-    updatedAt: timestamp("updated_at")
-      .$defaultFn(() => new Date())
-      .notNull(),
-  },
-  t => [
-    index("mobile_push_token_user_idx").on(t.userId),
-    unique("mobile_push_token_unique").on(t.expoPushToken),
   ],
 );
 
@@ -462,7 +436,6 @@ export const userRelations = relations(user, ({ one, many }) => ({
   }),
   payments: many(payment),
   pushSubscriptions: many(pushSubscription),
-  mobilePushTokens: many(mobilePushToken),
   notifications: many(notification),
   followingOrganizations: many(userFollowOrganization),
   followers: many(userFollowUser, { relationName: "following" }),
@@ -517,16 +490,6 @@ export const pushSubscriptionRelations = relations(
   ({ one }) => ({
     user: one(user, {
       fields: [pushSubscription.userId],
-      references: [user.id],
-    }),
-  }),
-);
-
-export const mobilePushTokenRelations = relations(
-  mobilePushToken,
-  ({ one }) => ({
-    user: one(user, {
-      fields: [mobilePushToken.userId],
       references: [user.id],
     }),
   }),
