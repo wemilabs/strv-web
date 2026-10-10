@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   experimental: {
     typedEnv: true,
+    turbopackGc: true,
+    turbopackLazyDynamicImports: true,
     turbopackRustReactCompiler: true,
     useOffline: true,
   },
