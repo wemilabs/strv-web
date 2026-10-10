@@ -4,7 +4,7 @@ export const THEME_COLORS = { light: "#ffffff", dark: "#09090b" } as const;
 
 export const APP_NAME = "Starva.shop";
 export const APP_URL = (
-  process.env.NEXT_PUBLIC_APP_URL ?? "https://starva.shop"
+  process.env.NEXT_PUBLIC_APP_URL || "https://starva.shop"
 ).replace(/\/+$/, "");
 export const APP_DOMAIN = new URL(APP_URL).host;
 
