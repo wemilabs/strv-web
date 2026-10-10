@@ -1,2 +1,2 @@
-DROP TABLE "mobile_push_token" CASCADE;--> statement-breakpoint
-DROP TYPE "public"."mobile_platform";
+DROP TABLE IF EXISTS "mobile_push_token" CASCADE;--> statement-breakpoint
+DROP TYPE IF EXISTS "public"."mobile_platform";
