@@ -1,5 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense, ViewTransition } from "react";
@@ -12,6 +12,7 @@ import { QueryProvider } from "@/components/providers/query-client-provider";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { UploadThingProvider } from "@/components/providers/uploadthing-provider";
 import { UpstashRealtimeProvider } from "@/components/providers/upstash-realtime-provider";
+import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
 import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
@@ -62,6 +63,25 @@ export const metadata: Metadata = {
     },
   ],
   creator: "Lisham",
+  applicationName: "Starva.shop",
+  appleWebApp: { capable: true, statusBarStyle: "default", title: "Starva" },
+  icons: {
+    icon: [
+      {
+        url: "/starva-dot-shop-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+      {
+        url: "/starva-dot-shop-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -87,6 +107,15 @@ export const metadata: Metadata = {
     images: [GENERAL_BRANDING_IMG_URL],
     creator: "@mthlish",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
 };
 
 export default async function RootLayout(props: LayoutProps<"/">) {
@@ -130,6 +159,7 @@ export default async function RootLayout(props: LayoutProps<"/">) {
             </QueryProvider>
           </UpstashRealtimeProvider>
         </ThemeProvider>
+        <ServiceWorkerRegister />
         <Analytics />
       </body>
     </html>
