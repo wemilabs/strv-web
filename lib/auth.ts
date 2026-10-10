@@ -1,4 +1,3 @@
-import { expo } from "@better-auth/expo";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
@@ -116,15 +115,6 @@ export const auth = betterAuth({
         member: customMemberRole,
       },
     }),
-    expo(),
-  ],
-  trustedOrigins: [
-    "strvmobile://",
-    "exp://192.168.1.62:8081",
-    "exp://192.168.1.63:8081",
-    "exp://192.168.1.64:8081",
-    "exp://192.168.1.65:8081",
-    "exp://192.168.1.66:8081",
   ],
   user: {
     additionalFields: {
