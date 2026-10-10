@@ -13,9 +13,10 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { UploadThingProvider } from "@/components/providers/uploadthing-provider";
 import { UpstashRealtimeProvider } from "@/components/providers/upstash-realtime-provider";
 import { ServiceWorkerRegister } from "@/components/pwa/service-worker-register";
+import { ThemeColorSync } from "@/components/pwa/theme-color-sync";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Toaster } from "@/components/ui/sonner";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { GENERAL_BRANDING_IMG_URL, THEME_COLORS } from "@/lib/constants";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -113,8 +114,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLORS.light },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLORS.dark },
   ],
 };
 
@@ -131,6 +132,7 @@ export default async function RootLayout(props: LayoutProps<"/">) {
           enableSystem
           disableTransitionOnChange
         >
+          <ThemeColorSync />
           <UpstashRealtimeProvider>
             {auth}
             <QueryProvider>

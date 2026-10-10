@@ -1,5 +1,7 @@
 import type { FeedbackStatus, FeedbackType, OrderStatus } from "@/db/schema";
 
+export const THEME_COLORS = { light: "#ffffff", dark: "#09090b" } as const;
+
 export const GENERAL_BRANDING_IMG_URL =
   "https://hsl8jk540a.ufs.sh/f/JFF4Q8WebB6du5UdXxlTLMJtliDeN9nXqzs57GUH6RgZbryB";
 export const FALLBACK_PRODUCT_IMG_URL =
