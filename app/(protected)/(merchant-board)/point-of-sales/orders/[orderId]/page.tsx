@@ -23,7 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getOrderById } from "@/data/orders";
 import { verifySession } from "@/data/user-session";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 import { calculateOrderFees, formatDate, formatPriceInRWF } from "@/lib/utils";
 
 async function OrderContent({
@@ -377,9 +377,7 @@ export async function generateMetadata({
     });
   }
 
-  const orderUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/orders/${orderId}`;
+  const orderUrl = `${APP_URL}/orders/${orderId}`;
 
   return {
     title,

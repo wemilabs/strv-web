@@ -20,7 +20,7 @@ import {
   getOrdersByUser,
 } from "@/data/orders";
 import { verifySession } from "@/data/user-session";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 async function OrdersContent() {
   const sessionData = await verifySession();
@@ -113,9 +113,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Manage and track all your orders in one place. View order status, track deliveries, and manage customer orders with Starva.shop's powerful order management system.";
 
-  const ordersUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/orders`;
+  const ordersUrl = `${APP_URL}/orders`;
 
   return {
     title,

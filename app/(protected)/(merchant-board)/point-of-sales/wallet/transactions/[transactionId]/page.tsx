@@ -29,7 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { verifySession } from "@/data/user-session";
 import { getTransactionById } from "@/data/wallet";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 import { cn, formatDate, formatPriceInRWF } from "@/lib/utils";
 
 const statusConfig = {
@@ -353,9 +353,7 @@ export async function generateMetadata({
     parseFloat(transaction.amount),
   )} on ${formatDate(transaction.createdAt)}. Status: ${transaction.status}.`;
 
-  const transactionUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/point-of-sales/wallet/transactions/${transactionId}`;
+  const transactionUrl = `${APP_URL}/point-of-sales/wallet/transactions/${transactionId}`;
 
   return {
     title,

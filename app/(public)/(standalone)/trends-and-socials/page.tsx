@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/empty";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { verifySession } from "@/data/user-session";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export const instant = true;
 
@@ -81,9 +81,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Discover what's trending in your area and gain valuable insights into customer preferences and market patterns.";
 
-  const trendsUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/trends-and-socials`;
+  const trendsUrl = `${APP_URL}/trends-and-socials`;
 
   return {
     title,

@@ -14,7 +14,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { getAllStoresWithFollowData } from "@/data/stores";
-import { GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
+import { APP_URL, GENERAL_BRANDING_IMG_URL } from "@/lib/constants";
 
 export const instant = true;
 
@@ -48,9 +48,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description =
     "Discover and order from local merchants. Browse menus, find your favorite restaurants, and order delicious food from local kitchens.";
 
-  const merchantsUrl = `${
-    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
-  }/merchants`;
+  const merchantsUrl = `${APP_URL}/merchants`;
 
   return {
     title,
