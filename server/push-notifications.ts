@@ -4,7 +4,7 @@ import { eq } from "drizzle-orm";
 import { headers } from "next/headers";
 import webpush from "web-push";
 import { db } from "@/db/drizzle";
-import { mobilePushToken, notification, pushSubscription } from "@/db/schema";
+import { notification, pushSubscription } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 type PushNotificationPayload = {
@@ -14,14 +14,6 @@ type PushNotificationPayload = {
   tag?: string;
   actions?: { action: string; title: string }[];
   requireInteraction?: boolean;
-};
-
-type ExpoPushMessage = {
-  to: string;
-  title: string;
-  body: string;
-  sound?: "default" | null;
-  data?: Record<string, unknown>;
 };
 
 // Configure web-push with VAPID keys
@@ -80,87 +72,6 @@ export async function unsubscribeFromPush(endpoint: string) {
     .where(eq(pushSubscription.endpoint, endpoint));
 
   return { success: true };
-}
-
-async function sendExpoPushMessages(messages: ExpoPushMessage[]) {
-  const response = await fetch("https://exp.host/--/api/v2/push/send", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "Accept-Encoding": "gzip, deflate",
-    },
-    body: JSON.stringify(messages),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Expo push request failed: ${response.status}`);
-  }
-
-  return response.json() as Promise<{
-    data?: { status: string; message?: string; details?: unknown }[];
-  }>;
-}
-
-export async function sendExpoPushToUser(
-  userId: string,
-  payload: PushNotificationPayload,
-) {
-  const tokens = await db
-    .select()
-    .from(mobilePushToken)
-    .where(eq(mobilePushToken.userId, userId));
-
-  if (tokens.length === 0) {
-    return { sent: 0, failed: 0 };
-  }
-
-  const messages: ExpoPushMessage[] = tokens.map(t => ({
-    to: t.expoPushToken,
-    title: payload.title,
-    body: payload.body,
-    sound: "default",
-    data: payload.url ? { url: payload.url } : undefined,
-  }));
-
-  let sent = 0;
-  let failed = 0;
-
-  try {
-    const result = await sendExpoPushMessages(messages);
-    const receipts = result.data ?? [];
-
-    for (let i = 0; i < receipts.length; i++) {
-      const receipt = receipts[i];
-      const token = tokens[i]?.expoPushToken;
-
-      if (receipt?.status !== "ok") {
-        failed++;
-
-        const message = receipt?.message ?? "";
-        const details = receipt?.details as { error?: string } | undefined;
-
-        const isDeviceNotRegistered =
-          details?.error === "DeviceNotRegistered" ||
-          message.includes("DeviceNotRegistered");
-
-        if (isDeviceNotRegistered && token) {
-          await db
-            .delete(mobilePushToken)
-            .where(eq(mobilePushToken.expoPushToken, token));
-        }
-
-        continue;
-      }
-
-      sent++;
-    }
-  } catch (error) {
-    console.error("Expo push failed:", error);
-    failed += tokens.length;
-  }
-
-  return { sent, failed };
 }
 
 // Send push notification to a specific user
@@ -259,11 +170,6 @@ export async function createNotification(data: {
   if (data.sendPush) {
     await Promise.allSettled([
       sendPushToUser(data.userId, {
-        title: data.title,
-        body: data.message,
-        url: data.actionUrl,
-      }),
-      sendExpoPushToUser(data.userId, {
         title: data.title,
         body: data.message,
         url: data.actionUrl,
